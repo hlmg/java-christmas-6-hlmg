@@ -1,7 +1,11 @@
 package christmas.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -13,5 +17,21 @@ class VisitDateTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> VisitDate.from(dayOfMonth));
+    }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            2023-12-01, 2023-12-02, false
+            2023-12-04, 2023-12-05, true
+            2023-12-05, 2023-12-06, true
+            2023-12-06, 2023-12-07, false
+            2023-12-10, 2023-12-01, false
+            """)
+    void 방문_날짜가_기간_안에_있는지_확인할_수_있다(String startDate, String endDate, boolean expected) {
+        VisitDate visitDate = VisitDate.from(5);
+
+        boolean actual = visitDate.isIn(LocalDate.parse(startDate), LocalDate.parse(endDate));
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
