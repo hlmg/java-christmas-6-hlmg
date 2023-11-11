@@ -30,6 +30,10 @@ public enum Menu {
                 .filter(menu -> menu.name.equals(name))
                 .findAny();
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
 
 /*

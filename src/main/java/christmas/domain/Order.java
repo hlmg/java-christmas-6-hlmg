@@ -23,4 +23,10 @@ public class Order {
             }
         }
     }
+
+    public int getTotalOrderAmount() {
+        return orderItems.stream()
+                .mapToInt(OrderItem::getPrice)
+                .sum();
+    }
 }
