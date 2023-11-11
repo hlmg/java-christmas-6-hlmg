@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Objects;
+
 public class OrderItem {
     private final Menu menu;
     private final int quantity;
@@ -24,5 +26,21 @@ public class OrderItem {
         if (quantity < 1) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof OrderItem orderItem)) {
+            return false;
+        }
+        return menu == orderItem.menu;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menu);
     }
 }
