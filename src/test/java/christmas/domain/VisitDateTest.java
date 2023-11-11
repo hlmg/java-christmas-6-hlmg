@@ -34,4 +34,18 @@ class VisitDateTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            2023-12-01, 1, 0
+            2023-12-01, 3, 2
+            2023-12-03, 1, -2
+            """)
+    void 기준일로부터의_일수를_계산할_수_있다(String baseDate, int dayOfMonth, int expected) {
+        VisitDate visitDate = VisitDate.from(dayOfMonth);
+
+        int actual = visitDate.getDaysFrom(LocalDate.parse(baseDate));
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

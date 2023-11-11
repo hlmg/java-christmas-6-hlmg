@@ -29,4 +29,18 @@ public class Order {
                 .mapToInt(OrderItem::getPrice)
                 .sum();
     }
+
+    public int getDessertMenuQuantity() {
+        return orderItems.stream()
+                .filter(OrderItem::isDessert)
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+    }
+
+    public int getMainMenuQuantity() {
+        return orderItems.stream()
+                .filter(OrderItem::isMain)
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+    }
 }

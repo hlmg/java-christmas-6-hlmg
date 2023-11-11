@@ -32,6 +32,18 @@ public class OrderItem {
         return menu.getPrice() * quantity;
     }
 
+    public boolean isDessert() {
+        return menu.isDessert();
+    }
+
+    public boolean isMain() {
+        return menu.isMain();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

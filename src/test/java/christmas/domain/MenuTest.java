@@ -19,4 +19,33 @@ class MenuTest {
 
         assertThat(menu.isPresent()).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            양송이수프, false
+            타파스, false
+            초코케이크, true
+            아이스크림, true
+            """)
+    void 메뉴가_디저트인지_확인할_수_있다(String menuName, boolean expected) {
+        Menu menu = Menu.from(menuName).orElseThrow();
+
+        assertThat(menu.isDessert()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            양송이수프, false
+            티본스테이크, true
+            바비큐립, true
+            해산물파스타, true
+            크리스마스파스타, true
+            초코케이크, false
+            아이스크림, false
+            """)
+    void 메뉴가_메인인지_확인할_수_있다(String menuName, boolean expected) {
+        Menu menu = Menu.from(menuName).orElseThrow();
+
+        assertThat(menu.isMain()).isEqualTo(expected);
+    }
 }

@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class VisitDate {
     private final LocalDate date;
@@ -25,5 +26,13 @@ public class VisitDate {
 
     public boolean isIn(LocalDate startDate, LocalDate endDate) {
         return !date.isBefore(startDate) && !date.isAfter(endDate);
+    }
+
+    public int getDaysFrom(LocalDate baseDate) {
+        return (int) ChronoUnit.DAYS.between(baseDate, date);
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

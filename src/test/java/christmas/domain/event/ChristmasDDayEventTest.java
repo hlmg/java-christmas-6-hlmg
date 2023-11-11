@@ -32,4 +32,24 @@ class ChristmasDDayEventTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    /*
+    - 1,000원으로 시작하여 크리스마스가 다가올수록 날마다 할인 금액이 100원씩 증가
+    - 총주문 금액에서 해당 금액만큼 할인
+    (e.g. 시작일인 12월 1일에 1,000원, 2일에 1,100원, ..., 25일엔 3,400원 할인)
+    */
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            1, 1000
+            2, 1100
+            """)
+    void 크리스마스_디데이_이벤트_혜택_테스트(int dayOfMonth, int expectedDiscountAmount) {
+        VisitDate visitDate = VisitDate.from(dayOfMonth);
+        Order order = Order.from(List.of(OrderItem.from("타파스", 2)));
+        Plan plan = Plan.from(visitDate, order);
+
+        Benefit actual = new ChristmasDDayEvent().getBenefitFrom(plan);
+
+        assertThat(actual).isEqualTo(Benefit.from(expectedDiscountAmount, List.of()));
+    }
 }
