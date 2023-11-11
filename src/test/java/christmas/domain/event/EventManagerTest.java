@@ -38,4 +38,6 @@ class EventManagerTest {
                         new Class[]{WeekdayEvent.class, WeekendEvent.class, SpecialEvent.class, PromotionEvent.class})
         );
     }
+
+    //TODO 혜택 내역 생성 테스트 작성하기
 }

@@ -19,4 +19,10 @@ public class EventManager {
                 .filter(event -> event.isSatisfiedBy(plan))
                 .toList();
     }
+
+    public List<BenefitDetail> getBenefitDetails(Plan plan) {
+        return getAppliedEvents(plan).stream()
+                .map(event -> BenefitDetail.from(event, event.getBenefitFrom(plan)))
+                .toList();
+    }
 }
