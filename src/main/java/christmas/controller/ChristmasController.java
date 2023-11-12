@@ -79,13 +79,18 @@ public class ChristmasController {
         List<BenefitDetailDto> benefitDetailDtos = new ArrayList<>();
         for (BenefitDetail benefitDetail : benefitDetails) {
             String eventName = benefitDetail.getEvent().getName();
-            int discountAmount = benefitDetail.getDiscountAmount();
+            int discountAmount = benefitDetail.getBenefitAmount();
             benefitDetailDtos.add(new BenefitDetailDto(eventName, discountAmount));
         }
 
         outputView.printBenefitDetails(benefitDetailDtos);
 
-//        outputView.printTotalBenefitAmount();
+        int totalBenefitAmount = 0;
+        for (BenefitDetail benefitDetail : benefitDetails) {
+            totalBenefitAmount += benefitDetail.getBenefitAmount();
+        }
+
+        outputView.printTotalBenefitAmount(totalBenefitAmount);
 
 //        outputView.printPaymentAmount();
 

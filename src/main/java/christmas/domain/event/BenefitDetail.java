@@ -27,4 +27,8 @@ public class BenefitDetail {
     public int getDiscountAmount() {
         return benefit.getDiscountAmount();
     }
+
+    public int getBenefitAmount() {
+        return benefit.getBenefitAmount();
+    }
 }

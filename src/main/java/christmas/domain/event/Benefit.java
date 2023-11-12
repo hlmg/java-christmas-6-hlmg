@@ -17,6 +17,14 @@ public class Benefit {
         return new Benefit(discountAmount, promotionMenu);
     }
 
+    // TODO: 혜택 금액 테스트 작성
+    public int getBenefitAmount() {
+        int promotionAmount = promotionMenus.stream()
+                .mapToInt(Menu::getPrice)
+                .sum();
+        return discountAmount + promotionAmount;
+    }
+
     public int getDiscountAmount() {
         return discountAmount;
     }
