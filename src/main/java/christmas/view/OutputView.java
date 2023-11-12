@@ -1,5 +1,8 @@
 package christmas.view;
 
+import christmas.dto.OrderItemResponseDto;
+import java.util.List;
+
 public class OutputView {
 
     public void printWelcome() {
@@ -9,5 +12,23 @@ public class OutputView {
     public void printEventPreview(int dayOfMonth) {
         String message = String.format("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", dayOfMonth);
         System.out.println(message);
+    }
+
+    /*
+    <주문 메뉴>
+    티본스테이크 1개
+    바비큐립 1개
+    초코케이크 2개
+    제로콜라 1개
+     */
+    public void printOrderItems(List<OrderItemResponseDto> orderItemResponseDtos) {
+        System.out.print("\n<주문 메뉴>\n");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (OrderItemResponseDto orderItemResponseDto : orderItemResponseDtos) {
+            stringBuilder.append(
+                    String.format("%s %d개\n", orderItemResponseDto.menuName(), orderItemResponseDto.quantity()));
+        }
+        System.out.print(stringBuilder);
     }
 }
