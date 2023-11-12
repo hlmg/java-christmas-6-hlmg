@@ -11,7 +11,6 @@ import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,48 +26,46 @@ public class ChristmasController {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
 
         List<OrderMenuDto> orderMenuDtos = inputView.getOrderItems();
-        List<OrderMenu> orderMenus = orderMenuDtos.stream()
-                .map(orderItem -> OrderMenu.from(orderItem.menuName(), orderItem.quantity()))
-                .toList();
-        Order order = Order.from(orderMenus);
+        Order order = orderFrom(orderMenuDtos);
 
         outputView.printEventPreview(dayOfMonth);
 
         outputView.printOrderItems(orderMenuDtos);
 
-        int totalOrderAmount = order.getTotalOrderAmount();
-        outputView.printTotalOrderAmount(totalOrderAmount);
+        outputView.printTotalOrderAmount(order.getTotalOrderAmount());
 
         AppliedBenefits appliedBenefits = christmasService.plan(visitDate, order);
 
-        Map<String, Integer> promotionMenus = appliedBenefits.getPromotionMenus();
+        outputView.printPromotionMenu(promotionMenuDtosFrom(appliedBenefits));
 
-        List<PromotionMenuDto> promotionMenuDtos = promotionMenus.entrySet().stream()
-                .map(entry -> new PromotionMenuDto(entry.getKey(), entry.getValue()))
-                .toList();
+        outputView.printBenefits(benefitDtosFrom(appliedBenefits));
 
-        outputView.printPromotionMenu(promotionMenuDtos);
-
-        List<Benefit> benefits = appliedBenefits.getBenefits();
-
-        List<BenefitDto> benefitDtos = new ArrayList<>();
-        for (Benefit benefit : benefits) {
-            String eventName = benefit.getEventName();
-            int discountAmount = benefit.getBenefitAmount();
-            benefitDtos.add(new BenefitDto(eventName, discountAmount));
-        }
-        outputView.printBenefits(benefitDtos);
-
-        int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
-
-        outputView.printTotalBenefitAmount(totalBenefitAmount);
+        outputView.printTotalBenefitAmount(appliedBenefits.getTotalBenefitAmount());
 
         int totalDiscountAmount = appliedBenefits.getTotalDiscountAmount();
+        outputView.printPaymentAmount(order.getTotalOrderAmount() - totalDiscountAmount);
 
-        outputView.printPaymentAmount(totalOrderAmount - totalDiscountAmount);
+        outputView.printEventBadge(christmasService.getEventBadge(appliedBenefits.getTotalBenefitAmount()));
+    }
 
-        String eventBadge = christmasService.getEventBadge(totalBenefitAmount);
+    private Order orderFrom(List<OrderMenuDto> orderMenuDtos) {
+        List<OrderMenu> orderMenus = orderMenuDtos.stream()
+                .map(orderItem -> OrderMenu.from(orderItem.menuName(), orderItem.quantity()))
+                .toList();
+        return Order.from(orderMenus);
+    }
 
-        outputView.printEventBadge(eventBadge);
+    private List<PromotionMenuDto> promotionMenuDtosFrom(AppliedBenefits appliedBenefits) {
+        Map<String, Integer> promotionMenus = appliedBenefits.getPromotionMenus();
+        return promotionMenus.entrySet().stream()
+                .map(entry -> new PromotionMenuDto(entry.getKey(), entry.getValue()))
+                .toList();
+    }
+
+    private List<BenefitDto> benefitDtosFrom(AppliedBenefits appliedBenefits) {
+        List<Benefit> benefits = appliedBenefits.getBenefits();
+        return benefits.stream()
+                .map(benefit -> new BenefitDto(benefit.getEventName(), benefit.getBenefitAmount()))
+                .toList();
     }
 }
