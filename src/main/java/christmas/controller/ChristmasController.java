@@ -92,7 +92,12 @@ public class ChristmasController {
 
         outputView.printTotalBenefitAmount(totalBenefitAmount);
 
-//        outputView.printPaymentAmount();
+        int totalDiscountAmount = 0;
+        for (BenefitDetail benefitDetail : benefitDetails) {
+            totalDiscountAmount += benefitDetail.getDiscountAmount();
+        }
+
+        outputView.printPaymentAmount(totalOrderAmount - totalDiscountAmount);
 
 //        outputView.printEventBadge();
 
