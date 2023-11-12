@@ -13,20 +13,21 @@ import org.junit.jupiter.params.provider.CsvSource;
 @SuppressWarnings("NonAsciiCharacters")
 class WeekendEventTest {
 
-    // 주말: (금요일, 토요일)
+    // 주말(금요일, 토요일) + 메인 메뉴 하나 이상
     @ParameterizedTest
     @CsvSource(textBlock = """
-            1, true
-            2, true
-            3, false
-            4, false
-            5, false
-            6, false
-            7, false
+            1, 양송이수프, false
+            1, 바비큐립, true
+            2, 바비큐립, true
+            3, 바비큐립, false
+            4, 바비큐립, false
+            5, 바비큐립, false
+            6, 바비큐립, false
+            7, 바비큐립, false
             """)
-    void 주말_이벤트_조건_테스트(int dayOfMonth, boolean expected) {
+    void 주말_이벤트_조건_테스트(int dayOfMonth, String menuName, boolean expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderMenu.from("타파스", 1)));
+        Order order = Order.from(List.of(OrderMenu.from(menuName, 1)));
         WeekendEvent weekendEvent = new WeekendEvent();
         boolean actual = weekendEvent.isSatisfiedCondition(visitDate, order);
 

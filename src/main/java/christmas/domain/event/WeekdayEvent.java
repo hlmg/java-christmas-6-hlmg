@@ -11,7 +11,9 @@ public class WeekdayEvent extends DecemberEvent {
     @Override
     protected boolean isSatisfiedCondition(VisitDate visitDate, Order order) {
         LocalDate date = visitDate.getDate();
-        return date.getDayOfWeek() != DayOfWeek.FRIDAY && date.getDayOfWeek() != DayOfWeek.SATURDAY;
+        int dessertMenuQuantity = order.getDessertMenuQuantity();
+        return date.getDayOfWeek() != DayOfWeek.FRIDAY && date.getDayOfWeek() != DayOfWeek.SATURDAY
+                && dessertMenuQuantity != 0;
     }
 
     // 평일 할인(일요일~목요일): 평일에는 디저트 메뉴를 메뉴 1개당 2,023원 할인

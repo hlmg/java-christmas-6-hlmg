@@ -30,12 +30,12 @@ class EventManagerTest {
     public static Stream<Arguments> 적용된_이벤트_목록을_가져올_수_있다() {
         return Stream.of(
                 Arguments.of(1,
-                        new Class[]{ChristmasDDayEvent.class, WeekendEvent.class, PromotionEvent.class}),
+                        new Class[]{ChristmasDDayEvent.class, PromotionEvent.class}),
                 Arguments.of(25,
-                        new Class[]{ChristmasDDayEvent.class, WeekdayEvent.class, SpecialEvent.class,
+                        new Class[]{ChristmasDDayEvent.class, SpecialEvent.class,
                                 PromotionEvent.class}),
                 Arguments.of(26,
-                        new Class[]{WeekdayEvent.class, PromotionEvent.class})
+                        new Class[]{PromotionEvent.class})
         );
     }
 
