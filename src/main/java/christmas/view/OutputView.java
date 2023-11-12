@@ -68,7 +68,7 @@ public class OutputView {
     특별 할인: -1,000원
     증정 이벤트: -25,000원
     */
-    public void printBenefitDetails(List<BenefitDto> benefitDtos) {
+    public void printBenefits(List<BenefitDto> benefitDtos) {
         System.out.print("\n<혜택 내역>\n");
 
         StringBuilder stringBuilder = new StringBuilder();

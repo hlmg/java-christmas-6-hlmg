@@ -6,12 +6,6 @@ import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
 import christmas.domain.event.AppliedBenefits;
 import christmas.domain.event.Benefit;
-import christmas.domain.event.ChristmasDDayEvent;
-import christmas.domain.event.EventManager;
-import christmas.domain.event.PromotionEvent;
-import christmas.domain.event.SpecialEvent;
-import christmas.domain.event.WeekdayEvent;
-import christmas.domain.event.WeekendEvent;
 import christmas.dto.BenefitDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
@@ -24,12 +18,6 @@ import java.util.Map;
 public class ChristmasController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private final EventManager eventManager = EventManager.from(
-            List.of(new ChristmasDDayEvent(),
-                    new WeekdayEvent(),
-                    new WeekendEvent(),
-                    new SpecialEvent(),
-                    new PromotionEvent()));
     private final ChristmasService christmasService = new ChristmasService();
 
     public void run() {
@@ -51,7 +39,7 @@ public class ChristmasController {
         int totalOrderAmount = order.getTotalOrderAmount();
         outputView.printTotalOrderAmount(totalOrderAmount);
 
-        AppliedBenefits appliedBenefits = eventManager.getBenefits(visitDate, order);
+        AppliedBenefits appliedBenefits = christmasService.plan(visitDate, order);
 
         Map<String, Integer> promotionMenus = appliedBenefits.getPromotionMenus();
 
@@ -69,8 +57,7 @@ public class ChristmasController {
             int discountAmount = benefit.getBenefitAmount();
             benefitDtos.add(new BenefitDto(eventName, discountAmount));
         }
-
-        outputView.printBenefitDetails(benefitDtos);
+        outputView.printBenefits(benefitDtos);
 
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
 
