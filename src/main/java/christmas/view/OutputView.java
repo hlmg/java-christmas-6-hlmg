@@ -78,4 +78,15 @@ public class OutputView {
         }
         System.out.println(stringBuilder);
     }
+
+    /*
+
+    <총혜택 금액>
+    -31,246원
+    */
+    public void printTotalBenefitAmount(int totalBenefitAmount) {
+        System.out.print("\n<총혜택 금액>\n");
+
+        System.out.printf("-%,d원\n", totalBenefitAmount);
+    }
 }
