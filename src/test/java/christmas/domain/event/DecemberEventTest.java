@@ -40,10 +40,5 @@ public class DecemberEventTest {
         public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
             return null;
         }
-
-        @Override
-        public String getName() {
-            return null;
-        }
     }
 }

@@ -18,11 +18,6 @@ public class SpecialEvent extends DecemberEvent {
     // 일요일 or 25일
     @Override
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
-        return Benefit.from(1000, List.of());
-    }
-
-    @Override
-    public String getName() {
-        return "특별 할인";
+        return Benefit.from("특별 할인", 1000, List.of());
     }
 }

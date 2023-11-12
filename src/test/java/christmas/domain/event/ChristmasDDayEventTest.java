@@ -47,6 +47,6 @@ class ChristmasDDayEventTest {
 
         Benefit actual = new ChristmasDDayEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from(expectedDiscountAmount, List.of()));
+        assertThat(actual).isEqualTo(Benefit.from("크리스마스 이벤트", expectedDiscountAmount, List.of()));
     }
 }

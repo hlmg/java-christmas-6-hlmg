@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
-import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -46,6 +45,6 @@ class WeekendEventTest {
 
         Benefit actual = new WeekendEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from(2023 * 3, List.of()));
+        assertThat(actual).isEqualTo(Benefit.from("주말 할인", 2023 * 3, List.of()));
     }
 }

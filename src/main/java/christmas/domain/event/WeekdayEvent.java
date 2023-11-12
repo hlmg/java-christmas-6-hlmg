@@ -19,11 +19,6 @@ public class WeekdayEvent extends DecemberEvent {
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
         int discountPerUnit = 2023;
         int dessertMenuQuantity = order.getDessertMenuQuantity();
-        return Benefit.from(discountPerUnit * dessertMenuQuantity, List.of());
-    }
-
-    @Override
-    public String getName() {
-        return "평일 할인";
+        return Benefit.from("평일 할인", discountPerUnit * dessertMenuQuantity, List.of());
     }
 }

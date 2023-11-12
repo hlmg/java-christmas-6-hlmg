@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.dto.BenefitDetailDto;
+import christmas.dto.BenefitDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
@@ -68,12 +68,12 @@ public class OutputView {
     특별 할인: -1,000원
     증정 이벤트: -25,000원
     */
-    public void printBenefitDetails(List<BenefitDetailDto> benefitDetailDtos) {
+    public void printBenefitDetails(List<BenefitDto> benefitDtos) {
         System.out.print("\n<혜택 내역>\n");
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (BenefitDetailDto benefitDetailDto : benefitDetailDtos) {
-            stringBuilder.append(String.format("%s -%,d원\n", benefitDetailDto.eventName(), benefitDetailDto.price()));
+        for (BenefitDto benefitDto : benefitDtos) {
+            stringBuilder.append(String.format("%s -%,d원\n", benefitDto.eventName(), benefitDto.price()));
         }
         System.out.println(stringBuilder);
     }

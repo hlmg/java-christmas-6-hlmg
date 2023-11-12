@@ -16,11 +16,6 @@ public class PromotionEvent extends DecemberEvent {
     // 샴페인 1개 증정
     @Override
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
-        return Benefit.from(0, List.of(Menu.CHAMPAGNE));
-    }
-
-    @Override
-    public String getName() {
-        return "증정 이벤트";
+        return Benefit.from("증정 이벤트", 0, List.of(Menu.CHAMPAGNE));
     }
 }

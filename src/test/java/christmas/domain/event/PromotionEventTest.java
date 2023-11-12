@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
-import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -38,6 +37,6 @@ class PromotionEventTest {
 
         Benefit actual = new PromotionEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from(0, List.of(Menu.CHAMPAGNE)));
+        assertThat(actual).isEqualTo(Benefit.from("증정 이벤트", 0, List.of(Menu.CHAMPAGNE)));
     }
 }

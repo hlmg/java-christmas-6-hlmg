@@ -8,6 +8,4 @@ public interface Event {
     boolean isSatisfiedBy(VisitDate visitDate, Order order);
 
     Benefit getBenefitFrom(VisitDate visitDate, Order order);
-
-    String getName();
 }

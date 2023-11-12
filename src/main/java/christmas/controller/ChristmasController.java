@@ -5,14 +5,14 @@ import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
-import christmas.domain.event.BenefitDetail;
+import christmas.domain.event.Benefit;
 import christmas.domain.event.ChristmasDDayEvent;
 import christmas.domain.event.EventManager;
 import christmas.domain.event.PromotionEvent;
 import christmas.domain.event.SpecialEvent;
 import christmas.domain.event.WeekdayEvent;
 import christmas.domain.event.WeekendEvent;
-import christmas.dto.BenefitDetailDto;
+import christmas.dto.BenefitDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import christmas.view.InputView;
@@ -53,11 +53,11 @@ public class ChristmasController {
         int totalOrderAmount = order.getTotalOrderAmount();
         outputView.printTotalOrderAmount(totalOrderAmount);
 
-        List<BenefitDetail> benefitDetails = eventManager.getBenefitDetails(visitDate, order);
+        List<Benefit> benefits = eventManager.getBenefits(visitDate, order);
 
         // 증정된 메뉴 가져오기
-        Map<String, Integer> promotionMenus = benefitDetails.stream()
-                .map(BenefitDetail::getPromotionMenus)
+        Map<String, Integer> promotionMenus = benefits.stream()
+                .map(Benefit::getPromotionMenus)
                 .flatMap(Collection::stream)
                 .collect(Collectors.groupingBy(Menu::getName, Collectors.summingInt(unused -> 1)));
 
@@ -67,25 +67,25 @@ public class ChristmasController {
 
         outputView.printPromotionMenu(promotionMenuDtos);
 
-        List<BenefitDetailDto> benefitDetailDtos = new ArrayList<>();
-        for (BenefitDetail benefitDetail : benefitDetails) {
-            String eventName = benefitDetail.getEvent().getName();
-            int discountAmount = benefitDetail.getBenefitAmount();
-            benefitDetailDtos.add(new BenefitDetailDto(eventName, discountAmount));
+        List<BenefitDto> benefitDtos = new ArrayList<>();
+        for (Benefit benefit : benefits) {
+            String eventName = benefit.getEventName();
+            int discountAmount = benefit.getBenefitAmount();
+            benefitDtos.add(new BenefitDto(eventName, discountAmount));
         }
 
-        outputView.printBenefitDetails(benefitDetailDtos);
+        outputView.printBenefitDetails(benefitDtos);
 
         int totalBenefitAmount = 0;
-        for (BenefitDetail benefitDetail : benefitDetails) {
-            totalBenefitAmount += benefitDetail.getBenefitAmount();
+        for (Benefit benefit : benefits) {
+            totalBenefitAmount += benefit.getBenefitAmount();
         }
 
         outputView.printTotalBenefitAmount(totalBenefitAmount);
 
         int totalDiscountAmount = 0;
-        for (BenefitDetail benefitDetail : benefitDetails) {
-            totalDiscountAmount += benefitDetail.getDiscountAmount();
+        for (Benefit benefit : benefits) {
+            totalDiscountAmount += benefit.getDiscountAmount();
         }
 
         outputView.printPaymentAmount(totalOrderAmount - totalDiscountAmount);
