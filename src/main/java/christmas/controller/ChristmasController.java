@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.ChristmasService;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
@@ -33,6 +34,7 @@ public class ChristmasController {
                     new WeekendEvent(),
                     new SpecialEvent(),
                     new PromotionEvent()));
+    private final ChristmasService christmasService = new ChristmasService();
 
     public void run() {
         outputView.printWelcome();
@@ -99,7 +101,8 @@ public class ChristmasController {
 
         outputView.printPaymentAmount(totalOrderAmount - totalDiscountAmount);
 
-//        outputView.printEventBadge();
+        String eventBadge = christmasService.getEventBadge(totalBenefitAmount);
 
+        outputView.printEventBadge(eventBadge);
     }
 }
