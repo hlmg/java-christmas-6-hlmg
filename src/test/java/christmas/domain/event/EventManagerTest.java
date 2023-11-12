@@ -22,7 +22,7 @@ class EventManagerTest {
     @MethodSource
     void 적용된_이벤트_목록을_가져올_수_있다(int dayOfMonth, Class<Event>[] expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderItem.from("타파스", 2)));
+        Order order = Order.from(List.of(OrderItem.from("양송이수프", 20)));
         Plan plan = Plan.from(visitDate, order);
         List<Event> appliedEvents = eventManager.getAppliedEvents(plan);
 
@@ -32,10 +32,12 @@ class EventManagerTest {
     public static Stream<Arguments> 적용된_이벤트_목록을_가져올_수_있다() {
         return Stream.of(
                 Arguments.of(1,
-                        new Class[]{ChristmasDDayEvent.class, WeekdayEvent.class, WeekendEvent.class,
-                                SpecialEvent.class, PromotionEvent.class}),
+                        new Class[]{ChristmasDDayEvent.class, WeekendEvent.class, PromotionEvent.class}),
+                Arguments.of(25,
+                        new Class[]{ChristmasDDayEvent.class, WeekdayEvent.class, SpecialEvent.class,
+                                PromotionEvent.class}),
                 Arguments.of(26,
-                        new Class[]{WeekdayEvent.class, WeekendEvent.class, SpecialEvent.class, PromotionEvent.class})
+                        new Class[]{WeekdayEvent.class, PromotionEvent.class})
         );
     }
 

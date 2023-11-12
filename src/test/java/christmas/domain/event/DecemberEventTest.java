@@ -24,10 +24,28 @@ public class DecemberEventTest {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Order order = Order.from(List.of(OrderItem.from("타파스", 2)));
         Plan plan = Plan.from(visitDate, order);
-        DecemberEvent decemberEvent = new PromotionEvent();
+        TestDecemberEventImpl testDecemberEvent = new TestDecemberEventImpl();
 
-        boolean actual = decemberEvent.isSatisfiedBy(plan);
+        boolean actual = testDecemberEvent.isSatisfiedBy(plan);
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    private static class TestDecemberEventImpl extends DecemberEvent {
+
+        @Override
+        protected boolean isSatisfiedCondition(Plan plan) {
+            return true;
+        }
+
+        @Override
+        public Benefit getBenefitFrom(Plan plan) {
+            return null;
+        }
+
+        @Override
+        public String getName() {
+            return null;
+        }
     }
 }
