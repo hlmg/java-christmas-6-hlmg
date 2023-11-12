@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.domain.event.BenefitDetail;
 import christmas.dto.BenefitDetailDto;
 import christmas.dto.OrderItemResponseDto;
 import christmas.dto.PromotionMenuDto;
@@ -88,5 +87,16 @@ public class OutputView {
         System.out.print("\n<총혜택 금액>\n");
 
         System.out.printf("-%,d원\n", totalBenefitAmount);
+    }
+
+    /*
+
+    <할인 후 예상 결제 금액>
+    135,754원
+     */
+    public void printPaymentAmount(int paymentAmount) {
+        System.out.print("\n<할인 후 예상 결제 금액>\n");
+
+        System.out.printf("%,d원\n", paymentAmount);
     }
 }
