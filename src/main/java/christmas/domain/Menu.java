@@ -43,6 +43,10 @@ public enum Menu {
         return this == T_BONE_STEAK || this == BARBECUE_RIBS || this == SEAFOOD_PASTA || this == CHRISTMAS_PASTA;
     }
 
+    public boolean isNotBeverage() {
+        return this != ZERO_COKE && this != RED_WINE && this != CHAMPAGNE;
+    }
+
     public String getName() {
         return name;
     }

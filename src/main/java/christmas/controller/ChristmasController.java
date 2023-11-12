@@ -32,7 +32,8 @@ public class ChristmasController {
 
         outputView.printOrderItems(orderMenuDtos);
 
-        outputView.printTotalOrderAmount(order.getTotalOrderAmount());
+        int totalOrderAmount = order.getTotalOrderAmount();
+        outputView.printTotalOrderAmount(totalOrderAmount);
 
         AppliedBenefits appliedBenefits = christmasService.plan(visitDate, order);
 
@@ -40,12 +41,12 @@ public class ChristmasController {
 
         outputView.printBenefits(benefitDtosFrom(appliedBenefits));
 
-        outputView.printTotalBenefitAmount(appliedBenefits.getTotalBenefitAmount());
+        int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
+        outputView.printTotalBenefitAmount(totalBenefitAmount);
 
-        int totalDiscountAmount = appliedBenefits.getTotalDiscountAmount();
-        outputView.printPaymentAmount(order.getTotalOrderAmount() - totalDiscountAmount);
+        outputView.printPaymentAmount(totalOrderAmount - appliedBenefits.getTotalDiscountAmount());
 
-        outputView.printEventBadge(christmasService.getEventBadge(appliedBenefits.getTotalBenefitAmount()));
+        outputView.printEventBadge(christmasService.getEventBadge(totalBenefitAmount));
     }
 
     private Order orderFrom(List<OrderMenuDto> orderMenuDtos) {

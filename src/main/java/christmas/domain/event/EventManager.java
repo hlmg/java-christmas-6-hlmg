@@ -23,6 +23,10 @@ public class EventManager {
     }
 
     public AppliedBenefits getBenefits(VisitDate visitDate, Order order) {
+        if (order.getTotalOrderAmount() < 10000) {
+            return AppliedBenefits.from(List.of());
+        }
+
         List<Benefit> benefits = getAppliedEvents(visitDate, order).stream()
                 .map(event -> event.getBenefitFrom(visitDate, order))
                 .toList();

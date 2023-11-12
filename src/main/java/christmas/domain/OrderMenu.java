@@ -32,6 +32,10 @@ public class OrderMenu {
         return menu.getPrice() * quantity;
     }
 
+    public boolean isNotBeverage() {
+        return menu.isNotBeverage();
+    }
+
     public boolean isDessert() {
         return menu.isDessert();
     }
