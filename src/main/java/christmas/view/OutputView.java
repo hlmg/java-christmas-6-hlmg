@@ -15,6 +15,7 @@ public class OutputView {
     }
 
     /*
+
     <주문 메뉴>
     티본스테이크 1개
     바비큐립 1개
@@ -30,5 +31,15 @@ public class OutputView {
                     String.format("%s %d개\n", orderItemResponseDto.menuName(), orderItemResponseDto.quantity()));
         }
         System.out.print(stringBuilder);
+    }
+
+    /*
+
+    <할인 전 총주문 금액>
+    142,000원
+     */
+    public void printTotalOrderAmount(int totalOrderAmount) {
+        System.out.print("\n<할인 전 총주문 금액>\n");
+        System.out.printf("%,d원\n", totalOrderAmount);
     }
 }
