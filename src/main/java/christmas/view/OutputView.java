@@ -53,11 +53,16 @@ public class OutputView {
     public void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
         System.out.print("\n<증정 메뉴>\n");
 
+        if (promotionMenuDtos.isEmpty()) {
+            System.out.println("없음");
+            return;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (PromotionMenuDto promotionMenuDto : promotionMenuDtos) {
             stringBuilder.append(String.format("%s %d개\n", promotionMenuDto.menuName(), promotionMenuDto.quantity()));
         }
-        System.out.println(stringBuilder);
+        System.out.print(stringBuilder);
     }
 
     /*
@@ -71,11 +76,16 @@ public class OutputView {
     public void printBenefits(List<BenefitDto> benefitDtos) {
         System.out.print("\n<혜택 내역>\n");
 
+        if (benefitDtos.isEmpty()) {
+            System.out.println("없음");
+            return;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (BenefitDto benefitDto : benefitDtos) {
             stringBuilder.append(String.format("%s -%,d원\n", benefitDto.eventName(), benefitDto.price()));
         }
-        System.out.println(stringBuilder);
+        System.out.print(stringBuilder);
     }
 
     /*
@@ -85,6 +95,11 @@ public class OutputView {
     */
     public void printTotalBenefitAmount(int totalBenefitAmount) {
         System.out.print("\n<총혜택 금액>\n");
+
+        if (totalBenefitAmount == 0) {
+            System.out.println("없음");
+            return;
+        }
 
         System.out.printf("-%,d원\n", totalBenefitAmount);
     }
@@ -97,6 +112,11 @@ public class OutputView {
     public void printPaymentAmount(int paymentAmount) {
         System.out.print("\n<할인 후 예상 결제 금액>\n");
 
+        if (paymentAmount == 0) {
+            System.out.println("없음");
+            return;
+        }
+
         System.out.printf("%,d원\n", paymentAmount);
     }
 
@@ -106,7 +126,7 @@ public class OutputView {
     산타
      */
     public void printEventBadge(String eventBadge) {
-        System.out.print("\n<할인 후 예상 결제 금액>\n");
+        System.out.print("\n<12월 이벤트 배지>\n");
 
         System.out.printf("%s\n", eventBadge);
     }
