@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.dto.BenefitDetailDto;
-import christmas.dto.OrderItemResponseDto;
+import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
 
@@ -24,13 +24,13 @@ public class OutputView {
     초코케이크 2개
     제로콜라 1개
      */
-    public void printOrderItems(List<OrderItemResponseDto> orderItemResponseDtos) {
+    public void printOrderItems(List<OrderMenuDto> orderMenuDtos) {
         System.out.print("\n<주문 메뉴>\n");
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (OrderItemResponseDto orderItemResponseDto : orderItemResponseDtos) {
+        for (OrderMenuDto orderMenuDto : orderMenuDtos) {
             stringBuilder.append(
-                    String.format("%s %d개\n", orderItemResponseDto.menuName(), orderItemResponseDto.quantity()));
+                    String.format("%s %d개\n", orderMenuDto.menuName(), orderMenuDto.quantity()));
         }
         System.out.print(stringBuilder);
     }

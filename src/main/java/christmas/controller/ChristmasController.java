@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.domain.ChristmasService;
 import christmas.domain.Menu;
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.OrderMenu;
 import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import christmas.domain.event.BenefitDetail;
@@ -14,8 +14,7 @@ import christmas.domain.event.SpecialEvent;
 import christmas.domain.event.WeekdayEvent;
 import christmas.domain.event.WeekendEvent;
 import christmas.dto.BenefitDetailDto;
-import christmas.dto.OrderItemRequestDto;
-import christmas.dto.OrderItemResponseDto;
+import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -42,21 +41,15 @@ public class ChristmasController {
         int dayOfMonth = inputView.getVisitDate();
         VisitDate visitDate = VisitDate.from(dayOfMonth);
 
-        List<OrderItemRequestDto> OrderItemRequestDtos = inputView.getOrderItems();
-        List<OrderItem> orderItems = OrderItemRequestDtos.stream()
-                .map(orderItem -> OrderItem.from(orderItem.menuName(), orderItem.quantity()))
+        List<OrderMenuDto> orderMenuDtos = inputView.getOrderItems();
+        List<OrderMenu> orderMenus = orderMenuDtos.stream()
+                .map(orderItem -> OrderMenu.from(orderItem.menuName(), orderItem.quantity()))
                 .toList();
-        Order order = Order.from(orderItems);
+        Order order = Order.from(orderMenus);
 
         outputView.printEventPreview(dayOfMonth);
 
-        // TODO: requestDto 그대로 반환해도 될듯, request response 하나로 합치기 or request dto에서 뭔가 하기
-        List<OrderItemResponseDto> orderItemResponseDtos = orderItems.stream().map(orderItem -> {
-            String menuName = orderItem.getMenuName();
-            int quantity = orderItem.getQuantity();
-            return new OrderItemResponseDto(menuName, quantity);
-        }).toList();
-        outputView.printOrderItems(orderItemResponseDtos);
+        outputView.printOrderItems(orderMenuDtos);
 
         Plan plan = Plan.from(visitDate, order);
 

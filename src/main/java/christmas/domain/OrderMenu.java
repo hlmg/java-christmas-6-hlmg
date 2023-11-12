@@ -2,19 +2,19 @@ package christmas.domain;
 
 import java.util.Objects;
 
-public class OrderItem {
+public class OrderMenu {
     private final Menu menu;
     private final int quantity;
 
-    public OrderItem(Menu menu, int quantity) {
+    public OrderMenu(Menu menu, int quantity) {
         this.menu = menu;
         this.quantity = quantity;
     }
 
-    public static OrderItem from(String menuName, int quantity) {
+    public static OrderMenu from(String menuName, int quantity) {
         Menu menu = getMenuFrom(menuName);
         validateQuantity(quantity);
-        return new OrderItem(menu, quantity);
+        return new OrderMenu(menu, quantity);
     }
 
     private static Menu getMenuFrom(String menuName) {
@@ -53,10 +53,10 @@ public class OrderItem {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof OrderItem orderItem)) {
+        if (!(o instanceof OrderMenu orderMenu)) {
             return false;
         }
-        return menu == orderItem.menu;
+        return menu == orderMenu.menu;
     }
 
     @Override

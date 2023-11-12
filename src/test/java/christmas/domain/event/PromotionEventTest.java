@@ -4,16 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Menu;
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.OrderMenu;
 import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class PromotionEventTest {
@@ -26,7 +23,7 @@ class PromotionEventTest {
             """)
     void 증정_이벤트_조건_테스트(String menuName, int quantity, boolean expected) {
         VisitDate visitDate = VisitDate.from(1);
-        Order order = Order.from(List.of(OrderItem.from(menuName, quantity)));
+        Order order = Order.from(List.of(OrderMenu.from(menuName, quantity)));
         Plan plan = Plan.from(visitDate, order);
         PromotionEvent promotionEvent = new PromotionEvent();
         boolean actual = promotionEvent.isSatisfiedCondition(plan);
@@ -38,7 +35,7 @@ class PromotionEventTest {
     @Test
     void 증정_이벤트_혜택_테스트() {
         VisitDate visitDate = VisitDate.from(1);
-        Order order = Order.from(List.of(OrderItem.from("양송이수프", 1)));
+        Order order = Order.from(List.of(OrderMenu.from("양송이수프", 1)));
         Plan plan = Plan.from(visitDate, order);
 
         Benefit actual = new PromotionEvent().getBenefitFrom(plan);

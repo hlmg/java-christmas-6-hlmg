@@ -4,43 +4,43 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Order {
-    private final List<OrderItem> orderItems;
+    private final List<OrderMenu> orderMenus;
 
-    private Order(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+    private Order(List<OrderMenu> orderMenus) {
+        this.orderMenus = orderMenus;
     }
 
-    public static Order from(List<OrderItem> orderItems) {
-        validateDuplicate(orderItems);
-        return new Order(orderItems);
+    public static Order from(List<OrderMenu> orderMenus) {
+        validateDuplicate(orderMenus);
+        return new Order(orderMenus);
     }
 
-    private static void validateDuplicate(List<OrderItem> orderItems) {
-        HashSet<OrderItem> distinctOrderItem = new HashSet<>();
-        for (OrderItem menuName : orderItems) {
-            if (!distinctOrderItem.add(menuName)) {
+    private static void validateDuplicate(List<OrderMenu> orderMenus) {
+        HashSet<OrderMenu> distinctOrderMenu = new HashSet<>();
+        for (OrderMenu menuName : orderMenus) {
+            if (!distinctOrderMenu.add(menuName)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
 
     public int getTotalOrderAmount() {
-        return orderItems.stream()
-                .mapToInt(OrderItem::getPrice)
+        return orderMenus.stream()
+                .mapToInt(OrderMenu::getPrice)
                 .sum();
     }
 
     public int getDessertMenuQuantity() {
-        return orderItems.stream()
-                .filter(OrderItem::isDessert)
-                .mapToInt(OrderItem::getQuantity)
+        return orderMenus.stream()
+                .filter(OrderMenu::isDessert)
+                .mapToInt(OrderMenu::getQuantity)
                 .sum();
     }
 
     public int getMainMenuQuantity() {
-        return orderItems.stream()
-                .filter(OrderItem::isMain)
-                .mapToInt(OrderItem::getQuantity)
+        return orderMenus.stream()
+                .filter(OrderMenu::isMain)
+                .mapToInt(OrderMenu::getQuantity)
                 .sum();
     }
 }

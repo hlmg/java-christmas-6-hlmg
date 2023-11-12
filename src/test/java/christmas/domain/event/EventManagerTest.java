@@ -3,7 +3,7 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.OrderMenu;
 import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
@@ -22,7 +22,7 @@ class EventManagerTest {
     @MethodSource
     void 적용된_이벤트_목록을_가져올_수_있다(int dayOfMonth, Class<Event>[] expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderItem.from("양송이수프", 20)));
+        Order order = Order.from(List.of(OrderMenu.from("양송이수프", 20)));
         Plan plan = Plan.from(visitDate, order);
         List<Event> appliedEvents = eventManager.getAppliedEvents(plan);
 

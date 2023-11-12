@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
-class OrderItemTest {
+class OrderMenuTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"김밥, 새우튀김"})
     void 메뉴판에_없는_메뉴면_예외가_발생한다(String menuName) {
 
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> OrderItem.from(menuName, 1));
+                .isThrownBy(() -> OrderMenu.from(menuName, 1));
     }
 
     @ParameterizedTest
@@ -23,7 +23,7 @@ class OrderItemTest {
     void 수량이_1_이상이_아니면_예외가_발생한다(int quantity) {
 
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> OrderItem.from("타파스", quantity));
+                .isThrownBy(() -> OrderMenu.from("타파스", quantity));
     }
 
     @ParameterizedTest
@@ -32,9 +32,9 @@ class OrderItemTest {
             타파스, 2, 11000
             """)
     void 가격을_계산할_수_있다(String menuName, int quantity, int expected) {
-        OrderItem orderItem = OrderItem.from(menuName, quantity);
+        OrderMenu orderMenu = OrderMenu.from(menuName, quantity);
 
-        int actual = orderItem.getPrice();
+        int actual = orderMenu.getPrice();
 
         assertThat(actual).isEqualTo(expected);
     }

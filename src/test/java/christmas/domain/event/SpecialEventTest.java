@@ -2,9 +2,8 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.Menu;
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.OrderMenu;
 import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
@@ -29,7 +28,7 @@ class SpecialEventTest {
             """)
     void 스페셜_이벤트_조건_테스트(int dayOfMonth, boolean expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderItem.from("타파스", 1)));
+        Order order = Order.from(List.of(OrderMenu.from("타파스", 1)));
         Plan plan = Plan.from(visitDate, order);
         SpecialEvent specialEvent = new SpecialEvent();
         boolean actual = specialEvent.isSatisfiedCondition(plan);
@@ -41,7 +40,7 @@ class SpecialEventTest {
     @Test
     void 스페셜_이벤트_혜택_테스트() {
         VisitDate visitDate = VisitDate.from(1);
-        Order order = Order.from(List.of(OrderItem.from("양송이수프", 1)));
+        Order order = Order.from(List.of(OrderMenu.from("양송이수프", 1)));
         Plan plan = Plan.from(visitDate, order);
 
         Benefit actual = new SpecialEvent().getBenefitFrom(plan);

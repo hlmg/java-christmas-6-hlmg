@@ -3,7 +3,7 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.OrderMenu;
 import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import java.util.List;
@@ -25,7 +25,7 @@ class ChristmasDDayEventTest {
             """)
     void 크리스마스_디데이_이벤트_조건_테스트(int dayOfMonth, boolean expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderItem.from("타파스", 2)));
+        Order order = Order.from(List.of(OrderMenu.from("타파스", 2)));
         Plan plan = Plan.from(visitDate, order);
 
         boolean actual = new ChristmasDDayEvent().isSatisfiedBy(plan);
@@ -45,7 +45,7 @@ class ChristmasDDayEventTest {
             """)
     void 크리스마스_디데이_이벤트_혜택_테스트(int dayOfMonth, int expectedDiscountAmount) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        Order order = Order.from(List.of(OrderItem.from("타파스", 2)));
+        Order order = Order.from(List.of(OrderMenu.from("타파스", 2)));
         Plan plan = Plan.from(visitDate, order);
 
         Benefit actual = new ChristmasDDayEvent().getBenefitFrom(plan);

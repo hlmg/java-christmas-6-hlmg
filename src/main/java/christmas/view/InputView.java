@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.dto.OrderItemRequestDto;
+import christmas.dto.OrderMenuDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,8 +19,8 @@ public class InputView {
         }
     }
 
-    public List<OrderItemRequestDto> getOrderItems() {
-        List<OrderItemRequestDto> orderItemRequestDtos = new ArrayList<>();
+    public List<OrderMenuDto> getOrderItems() {
+        List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
         System.out.println("주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
         String input = Console.readLine();
         Pattern pattern = Pattern.compile("^([가-힣a-zA-Z]+-[0-9]+,?)+$");
@@ -31,8 +31,8 @@ public class InputView {
         String[] split = input.split(",");
         for (String s : split) {
             String[] split1 = s.split("-");
-            orderItemRequestDtos.add(new OrderItemRequestDto(split1[0], Integer.parseInt(split1[1])));
+            orderMenuDtos.add(new OrderMenuDto(split1[0], Integer.parseInt(split1[1])));
         }
-        return orderItemRequestDtos;
+        return orderMenuDtos;
     }
 }
