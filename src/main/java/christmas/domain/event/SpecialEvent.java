@@ -17,4 +17,9 @@ public class SpecialEvent extends DecemberEvent {
         }
         return Benefit.from(0, List.of());
     }
+
+    @Override
+    public String getName() {
+        return "특별 할인";
+    }
 }

@@ -18,4 +18,9 @@ public class WeekdayEvent extends DecemberEvent {
         }
         return Benefit.from(0, List.of());
     }
+
+    @Override
+    public String getName() {
+        return "평일 할인";
+    }
 }

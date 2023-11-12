@@ -18,4 +18,9 @@ public class WeekendEvent extends DecemberEvent {
         }
         return Benefit.from(0, List.of());
     }
+
+    @Override
+    public String getName() {
+        return "주말 할인";
+    }
 }

@@ -33,4 +33,9 @@ public class ChristmasDDayEvent implements Event {
 
         return Benefit.from(totalDiscountAmount, List.of());
     }
+
+    @Override
+    public String getName() {
+        return "크리스마스 디데이 할인";
+    }
 }
