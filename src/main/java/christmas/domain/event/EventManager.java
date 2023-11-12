@@ -22,9 +22,10 @@ public class EventManager {
                 .toList();
     }
 
-    public List<Benefit> getBenefits(VisitDate visitDate, Order order) {
-        return getAppliedEvents(visitDate, order).stream()
+    public AppliedBenefits getBenefits(VisitDate visitDate, Order order) {
+        List<Benefit> benefits = getAppliedEvents(visitDate, order).stream()
                 .map(event -> event.getBenefitFrom(visitDate, order))
                 .toList();
+        return AppliedBenefits.from(benefits);
     }
 }
