@@ -42,6 +42,6 @@ class SpecialEventTest {
 
         Benefit actual = new SpecialEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from("스페셜 이벤트", 1000, List.of()));
+        assertThat(actual).isEqualTo(Benefit.from("특별 할인", 1000, List.of()));
     }
 }
