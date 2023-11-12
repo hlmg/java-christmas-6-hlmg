@@ -44,6 +44,10 @@ public class OrderItem {
         return quantity;
     }
 
+    public String getMenuName() {
+        return menu.getName();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

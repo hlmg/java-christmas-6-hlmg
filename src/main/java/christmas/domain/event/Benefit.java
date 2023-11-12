@@ -17,6 +17,14 @@ public class Benefit {
         return new Benefit(discountAmount, promotionMenu);
     }
 
+    public int getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public List<Menu> getPromotionMenus() {
+        return promotionMenus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

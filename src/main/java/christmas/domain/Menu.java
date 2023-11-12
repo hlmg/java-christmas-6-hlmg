@@ -42,6 +42,10 @@ public enum Menu {
     public boolean isMain() {
         return this == T_BONE_STEAK || this == BARBECUE_RIBS || this == SEAFOOD_PASTA || this == CHRISTMAS_PASTA;
     }
+
+    public String getName() {
+        return name;
+    }
 }
 
 /*
