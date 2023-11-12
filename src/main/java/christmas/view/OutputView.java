@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.dto.OrderItemResponseDto;
+import christmas.dto.PromotionMenuDto;
 import java.util.List;
 
 public class OutputView {
@@ -41,5 +42,20 @@ public class OutputView {
     public void printTotalOrderAmount(int totalOrderAmount) {
         System.out.print("\n<할인 전 총주문 금액>\n");
         System.out.printf("%,d원\n", totalOrderAmount);
+    }
+
+    /*
+
+    <증정 메뉴>
+    샴페인 1개
+     */
+    public void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
+        System.out.print("\n<증정 메뉴>\n");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (PromotionMenuDto promotionMenuDto : promotionMenuDtos) {
+            stringBuilder.append(String.format("%s %d개\n", promotionMenuDto.menuName(), promotionMenuDto.quantity()));
+        }
+        System.out.println(stringBuilder);
     }
 }
