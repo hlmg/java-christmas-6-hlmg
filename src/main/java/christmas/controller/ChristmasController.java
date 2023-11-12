@@ -4,7 +4,6 @@ import christmas.domain.ChristmasService;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
-import christmas.domain.Plan;
 import christmas.domain.VisitDate;
 import christmas.domain.event.BenefitDetail;
 import christmas.domain.event.ChristmasDDayEvent;
@@ -51,13 +50,10 @@ public class ChristmasController {
 
         outputView.printOrderItems(orderMenuDtos);
 
-        Plan plan = Plan.from(visitDate, order);
-
-        // plan이 service 역할을 하는 것 같아서, 없애는 것 고려
-        int totalOrderAmount = plan.getTotalOrderAmount();
+        int totalOrderAmount = order.getTotalOrderAmount();
         outputView.printTotalOrderAmount(totalOrderAmount);
 
-        List<BenefitDetail> benefitDetails = eventManager.getBenefitDetails(plan);
+        List<BenefitDetail> benefitDetails = eventManager.getBenefitDetails(visitDate, order);
 
         // 증정된 메뉴 가져오기
         Map<String, Integer> promotionMenus = benefitDetails.stream()

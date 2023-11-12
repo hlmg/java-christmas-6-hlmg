@@ -1,12 +1,13 @@
 package christmas.domain.event;
 
-import christmas.domain.Plan;
+import christmas.domain.Order;
+import christmas.domain.VisitDate;
 
 public interface Event {
 
-    boolean isSatisfiedBy(Plan plan);
+    boolean isSatisfiedBy(VisitDate visitDate, Order order);
 
-    Benefit getBenefitFrom(Plan plan);
+    Benefit getBenefitFrom(VisitDate visitDate, Order order);
 
     String getName();
 }

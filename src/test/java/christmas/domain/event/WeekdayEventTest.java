@@ -28,9 +28,8 @@ class WeekdayEventTest {
     void 평일_이벤트_조건_테스트(int dayOfMonth, boolean expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Order order = Order.from(List.of(OrderMenu.from("타파스", 1)));
-        Plan plan = Plan.from(visitDate, order);
         WeekdayEvent weekdayEvent = new WeekdayEvent();
-        boolean actual = weekdayEvent.isSatisfiedCondition(plan);
+        boolean actual = weekdayEvent.isSatisfiedCondition(visitDate, order);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -44,9 +43,8 @@ class WeekdayEventTest {
                 OrderMenu.from("아이스크림", 2),
                 OrderMenu.from("티본스테이크", 10))
         );
-        Plan plan = Plan.from(visitDate, order);
 
-        Benefit actual = new WeekdayEvent().getBenefitFrom(plan);
+        Benefit actual = new WeekdayEvent().getBenefitFrom(visitDate, order);
 
         assertThat(actual).isEqualTo(Benefit.from(2023 * 3, List.of()));
     }

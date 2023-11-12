@@ -24,9 +24,8 @@ class PromotionEventTest {
     void 증정_이벤트_조건_테스트(String menuName, int quantity, boolean expected) {
         VisitDate visitDate = VisitDate.from(1);
         Order order = Order.from(List.of(OrderMenu.from(menuName, quantity)));
-        Plan plan = Plan.from(visitDate, order);
         PromotionEvent promotionEvent = new PromotionEvent();
-        boolean actual = promotionEvent.isSatisfiedCondition(plan);
+        boolean actual = promotionEvent.isSatisfiedCondition(visitDate, order);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -36,9 +35,8 @@ class PromotionEventTest {
     void 증정_이벤트_혜택_테스트() {
         VisitDate visitDate = VisitDate.from(1);
         Order order = Order.from(List.of(OrderMenu.from("양송이수프", 1)));
-        Plan plan = Plan.from(visitDate, order);
 
-        Benefit actual = new PromotionEvent().getBenefitFrom(plan);
+        Benefit actual = new PromotionEvent().getBenefitFrom(visitDate, order);
 
         assertThat(actual).isEqualTo(Benefit.from(0, List.of(Menu.CHAMPAGNE)));
     }

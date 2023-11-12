@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
-import christmas.domain.Plan;
+import christmas.domain.Order;
+import christmas.domain.VisitDate;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +12,11 @@ public class ChristmasDDayEvent implements Event {
     - 이벤트 기간: 2023.12.1 ~ 2023.12.25
      */
     @Override
-    public boolean isSatisfiedBy(Plan plan) {
+    public boolean isSatisfiedBy(VisitDate visitDate, Order order) {
         LocalDate startDate = LocalDate.of(2023, 12, 1);
         LocalDate endDate = LocalDate.of(2023, 12, 25);
 
-        return plan.isIn(startDate, endDate);
+        return visitDate.isIn(startDate, endDate);
     }
 
     /*
@@ -24,9 +25,9 @@ public class ChristmasDDayEvent implements Event {
       (e.g. 시작일인 12월 1일에 1,000원, 2일에 1,100원, ..., 25일엔 3,400원 할인)
      */
     @Override
-    public Benefit getBenefitFrom(Plan plan) {
+    public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
         LocalDate startDate = LocalDate.of(2023, 12, 1);
-        int days = plan.getDaysFrom(startDate);
+        int days = visitDate.getDaysFrom(startDate);
         int dailyDiscountIncrement = 100;
         int baseDiscountAmount = 1000;
         int totalDiscountAmount = baseDiscountAmount + (dailyDiscountIncrement * days);

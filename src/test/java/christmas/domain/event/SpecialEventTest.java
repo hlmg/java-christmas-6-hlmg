@@ -29,9 +29,8 @@ class SpecialEventTest {
     void 스페셜_이벤트_조건_테스트(int dayOfMonth, boolean expected) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Order order = Order.from(List.of(OrderMenu.from("타파스", 1)));
-        Plan plan = Plan.from(visitDate, order);
         SpecialEvent specialEvent = new SpecialEvent();
-        boolean actual = specialEvent.isSatisfiedCondition(plan);
+        boolean actual = specialEvent.isSatisfiedCondition(visitDate, order);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -41,9 +40,8 @@ class SpecialEventTest {
     void 스페셜_이벤트_혜택_테스트() {
         VisitDate visitDate = VisitDate.from(1);
         Order order = Order.from(List.of(OrderMenu.from("양송이수프", 1)));
-        Plan plan = Plan.from(visitDate, order);
 
-        Benefit actual = new SpecialEvent().getBenefitFrom(plan);
+        Benefit actual = new SpecialEvent().getBenefitFrom(visitDate, order);
 
         assertThat(actual).isEqualTo(Benefit.from(1000, List.of()));
     }

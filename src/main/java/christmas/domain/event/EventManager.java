@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
-import christmas.domain.Plan;
+import christmas.domain.Order;
+import christmas.domain.VisitDate;
 import java.util.List;
 
 public class EventManager {
@@ -14,15 +15,16 @@ public class EventManager {
         return new EventManager(events);
     }
 
-    public List<Event> getAppliedEvents(Plan plan) {
+    // private 으로 하거나 List<Event>를 가진 객체를 반환해도 될듯
+    public List<Event> getAppliedEvents(VisitDate visitDate, Order order) {
         return events.stream()
-                .filter(event -> event.isSatisfiedBy(plan))
+                .filter(event -> event.isSatisfiedBy(visitDate, order))
                 .toList();
     }
 
-    public List<BenefitDetail> getBenefitDetails(Plan plan) {
-        return getAppliedEvents(plan).stream()
-                .map(event -> BenefitDetail.from(event, event.getBenefitFrom(plan)))
+    public List<BenefitDetail> getBenefitDetails(VisitDate visitDate, Order order) {
+        return getAppliedEvents(visitDate, order).stream()
+                .map(event -> BenefitDetail.from(event, event.getBenefitFrom(visitDate, order)))
                 .toList();
     }
 }
