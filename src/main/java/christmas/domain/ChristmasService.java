@@ -30,6 +30,6 @@ public class ChristmasService {
     }
 
     public AppliedBenefits plan(VisitDate visitDate, Order order) {
-        return eventManager.getBenefits(visitDate, order);
+        return eventManager.apply(visitDate, order);
     }
 }

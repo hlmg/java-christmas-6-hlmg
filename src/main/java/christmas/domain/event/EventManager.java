@@ -5,6 +5,7 @@ import christmas.domain.VisitDate;
 import java.util.List;
 
 public class EventManager {
+    public static final int MIN_ORDER_AMOUNT = 10000;
     private final List<Event> events;
 
     private EventManager(List<Event> events) {
@@ -15,21 +16,23 @@ public class EventManager {
         return new EventManager(events);
     }
 
-    // private 으로 하거나 List<Event>를 가진 객체를 반환해도 될듯
-    public List<Event> getAppliedEvents(VisitDate visitDate, Order order) {
-        return events.stream()
-                .filter(event -> event.isSatisfiedBy(visitDate, order))
-                .toList();
-    }
-
-    public AppliedBenefits getBenefits(VisitDate visitDate, Order order) {
-        if (order.getTotalOrderAmount() < 10000) {
+    public AppliedBenefits apply(VisitDate visitDate, Order order) {
+        if (isLessThanMinOverAmount(order)) {
             return AppliedBenefits.from(List.of());
         }
 
-        List<Benefit> benefits = getAppliedEvents(visitDate, order).stream()
+        List<Benefit> benefits = getBenefits(visitDate, order);
+        return AppliedBenefits.from(benefits);
+    }
+
+    private boolean isLessThanMinOverAmount(Order order) {
+        return order.getTotalOrderAmount() < MIN_ORDER_AMOUNT;
+    }
+
+    private List<Benefit> getBenefits(VisitDate visitDate, Order order) {
+        return events.stream()
+                .filter(event -> event.isSatisfiedBy(visitDate, order))
                 .map(event -> event.getBenefitFrom(visitDate, order))
                 .toList();
-        return AppliedBenefits.from(benefits);
     }
 }
