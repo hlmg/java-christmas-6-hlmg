@@ -36,3 +36,15 @@ public class EventManager {
                 .toList();
     }
 }
+
+// 프로모션 이벤트
+// 할인 이벤트
+
+// 할인 이벤트의 경우 만족하면
+
+// 할인 이벤트
+// getEventname, getdiscountAmount
+// 증정 이벤트
+// getEventName, getPromotionMenu
+
+

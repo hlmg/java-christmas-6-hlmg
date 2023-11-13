@@ -4,7 +4,6 @@ import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.List;
 
 public class SpecialEvent extends DecemberEvent {
 
@@ -18,6 +17,6 @@ public class SpecialEvent extends DecemberEvent {
     // 일요일 or 25일
     @Override
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
-        return Benefit.from("특별 할인", 1000, List.of());
+        return DiscountBenefit.from("특별 할인", 1000);
     }
 }

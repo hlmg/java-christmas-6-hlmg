@@ -3,7 +3,6 @@ package christmas.domain.event;
 import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import java.time.LocalDate;
-import java.util.List;
 
 public class ChristmasDDayEvent implements Event {
 
@@ -32,6 +31,6 @@ public class ChristmasDDayEvent implements Event {
         int baseDiscountAmount = 1000;
         int totalDiscountAmount = baseDiscountAmount + (dailyDiscountIncrement * days);
 
-        return Benefit.from("크리스마스 디데이 할인", totalDiscountAmount, List.of());
+        return DiscountBenefit.from("크리스마스 디데이 할인", totalDiscountAmount);
     }
 }

@@ -6,6 +6,7 @@ import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
 import christmas.domain.event.AppliedBenefits;
 import christmas.domain.event.Benefit;
+import christmas.domain.event.DiscountBenefit;
 import christmas.dto.BenefitDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
@@ -64,8 +65,8 @@ public class ChristmasController {
     }
 
     private List<BenefitDto> benefitDtosFrom(AppliedBenefits appliedBenefits) {
-        List<Benefit> benefits = appliedBenefits.getBenefits();
-        return benefits.stream()
+        List<Benefit> discountBenefits = appliedBenefits.getBenefits();
+        return discountBenefits.stream()
                 .map(benefit -> new BenefitDto(benefit.getEventName(), benefit.getBenefitAmount()))
                 .toList();
     }

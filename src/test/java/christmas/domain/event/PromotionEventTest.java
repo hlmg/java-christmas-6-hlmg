@@ -37,6 +37,6 @@ class PromotionEventTest {
 
         Benefit actual = new PromotionEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from("증정 이벤트", 0, List.of(Menu.CHAMPAGNE)));
+        assertThat(actual).isEqualTo(PromotionBenefit.from("증정 이벤트", Menu.CHAMPAGNE));
     }
 }

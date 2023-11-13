@@ -4,7 +4,6 @@ import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.List;
 
 public class WeekdayEvent extends DecemberEvent {
 
@@ -21,6 +20,6 @@ public class WeekdayEvent extends DecemberEvent {
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
         int discountPerUnit = 2023;
         int dessertMenuQuantity = order.getDessertMenuQuantity();
-        return Benefit.from("평일 할인", discountPerUnit * dessertMenuQuantity, List.of());
+        return DiscountBenefit.from("평일 할인", discountPerUnit * dessertMenuQuantity);
     }
 }

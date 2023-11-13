@@ -46,6 +46,6 @@ class WeekdayEventTest {
 
         Benefit actual = new WeekdayEvent().getBenefitFrom(visitDate, order);
 
-        assertThat(actual).isEqualTo(Benefit.from("평일 할인", 2023 * 3, List.of()));
+        assertThat(actual).isEqualTo(DiscountBenefit.from("평일 할인", 2023 * 3));
     }
 }

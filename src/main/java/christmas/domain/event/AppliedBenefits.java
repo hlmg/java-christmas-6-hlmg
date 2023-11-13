@@ -1,9 +1,9 @@
 package christmas.domain.event;
 
 import christmas.domain.Menu;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AppliedBenefits {
@@ -19,8 +19,8 @@ public class AppliedBenefits {
 
     public Map<String, Integer> getPromotionMenus() {
         return benefits.stream()
-                .map(Benefit::getPromotionMenus)
-                .flatMap(Collection::stream)
+                .map(Benefit::getPromotionMenu)
+                .flatMap(Optional::stream)
                 .collect(Collectors.groupingBy(Menu::getName, Collectors.summingInt(unused -> 1)));
     }
 

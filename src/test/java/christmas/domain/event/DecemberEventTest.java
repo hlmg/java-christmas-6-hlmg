@@ -37,7 +37,7 @@ public class DecemberEventTest {
         }
 
         @Override
-        public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
+        public DiscountBenefit getBenefitFrom(VisitDate visitDate, Order order) {
             return null;
         }
     }
