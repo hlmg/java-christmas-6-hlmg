@@ -1,7 +1,7 @@
-package christmas.domain.event;
+package christmas.domain;
 
-import christmas.domain.Order;
-import christmas.domain.VisitDate;
+import christmas.domain.event.Event;
+import christmas.domain.Benefit.Benefit;
 import java.util.List;
 
 public class EventManager {

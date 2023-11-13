@@ -1,6 +1,6 @@
-package christmas.domain.event;
+package christmas.domain;
 
-import christmas.domain.Menu;
+import christmas.domain.Benefit.Benefit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

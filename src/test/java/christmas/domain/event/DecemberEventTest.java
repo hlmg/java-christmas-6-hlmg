@@ -2,6 +2,7 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.Benefit.DiscountBenefit;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;

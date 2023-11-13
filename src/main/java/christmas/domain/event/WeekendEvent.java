@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.domain.Benefit.Benefit;
+import christmas.domain.Benefit.DiscountBenefit;
 import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import java.time.DayOfWeek;

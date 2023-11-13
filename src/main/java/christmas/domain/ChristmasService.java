@@ -1,8 +1,6 @@
 package christmas.domain;
 
-import christmas.domain.event.AppliedBenefits;
 import christmas.domain.event.ChristmasDDayEvent;
-import christmas.domain.event.EventManager;
 import christmas.domain.event.PromotionEvent;
 import christmas.domain.event.SpecialEvent;
 import christmas.domain.event.WeekdayEvent;

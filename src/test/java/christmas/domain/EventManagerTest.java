@@ -1,5 +1,11 @@
-package christmas.domain.event;
+package christmas.domain;
 
+import christmas.domain.EventManager;
+import christmas.domain.event.ChristmasDDayEvent;
+import christmas.domain.event.PromotionEvent;
+import christmas.domain.event.SpecialEvent;
+import christmas.domain.event.WeekdayEvent;
+import christmas.domain.event.WeekendEvent;
 import java.util.List;
 
 @SuppressWarnings("NonAsciiCharacters")
