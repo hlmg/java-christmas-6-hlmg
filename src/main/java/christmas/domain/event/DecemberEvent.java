@@ -5,6 +5,8 @@ import christmas.domain.VisitDate;
 import java.time.LocalDate;
 
 public abstract class DecemberEvent implements Event {
+    private static final LocalDate startDate = LocalDate.of(2023, 12, 1);
+    private static final LocalDate endDate = LocalDate.of(2023, 12, 31);
 
     // 이벤트 기간: 2023.12.1 ~ 2023.12.31
     @Override
@@ -12,10 +14,7 @@ public abstract class DecemberEvent implements Event {
         return isInEventPeriod(visitDate) && isSatisfiedCondition(visitDate, order);
     }
 
-    private static boolean isInEventPeriod(VisitDate visitDate) {
-        LocalDate startDate = LocalDate.of(2023, 12, 1);
-        LocalDate endDate = LocalDate.of(2023, 12, 31);
-
+    private boolean isInEventPeriod(VisitDate visitDate) {
         return visitDate.isIn(startDate, endDate);
     }
 

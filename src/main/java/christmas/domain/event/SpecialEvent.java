@@ -8,17 +8,21 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class SpecialEvent extends DecemberEvent {
+    public static final LocalDate CHRISTMAS = LocalDate.of(2023, 12, 25);
+    public static final String EVENT_NAME = "특별 할인";
+    public static final int DISCOUNT_AMOUNT = 1000;
 
     @Override
     protected boolean isSatisfiedCondition(VisitDate visitDate, Order order) {
-        LocalDate date = visitDate.getDate();
-        return date.getDayOfWeek() == DayOfWeek.SUNDAY || date.isEqual(LocalDate.of(2023, 12, 25));
+        return isSpecialDay(visitDate.getDate());
     }
 
-    // 특별 할인: 이벤트 달력에 별이 있으면 총주문 금액에서 1,000원 할인
-    // 일요일 or 25일
+    private boolean isSpecialDay(LocalDate date) {
+        return date.getDayOfWeek() == DayOfWeek.SUNDAY || date.isEqual(CHRISTMAS);
+    }
+
     @Override
     public Benefit getBenefitFrom(VisitDate visitDate, Order order) {
-        return DiscountBenefit.from("특별 할인", 1000);
+        return DiscountBenefit.from(EVENT_NAME, DISCOUNT_AMOUNT);
     }
 }
