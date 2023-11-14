@@ -5,7 +5,7 @@ import christmas.domain.event.Event;
 import java.util.List;
 
 public final class EventManager {
-    public static final int MIN_ORDER_AMOUNT = 10000;
+    private static final int MIN_ORDER_AMOUNT = 10_000;
     private final List<Event> events;
 
     private EventManager(List<Event> events) {
