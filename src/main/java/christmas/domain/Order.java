@@ -4,7 +4,6 @@ import static christmas.exception.ExceptionMessages.INVALID_ORDER;
 import static christmas.exception.ExceptionMessages.ONLY_BEVERAGES_NOT_ALLOWED;
 import static christmas.exception.ExceptionMessages.INVALID_ORDER_MENU_QUANTITY;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public final class Order {
     private final List<OrderMenu> orderMenus;
 
     private Order(List<OrderMenu> orderMenus) {
-        this.orderMenus = orderMenus;
+        this.orderMenus = List.copyOf(orderMenus);
     }
 
     public static Order from(List<OrderMenu> orderMenus) {
@@ -70,6 +69,6 @@ public final class Order {
     }
 
     public List<OrderMenu> getOrderMenus() {
-        return Collections.unmodifiableList(orderMenus);
+        return orderMenus;
     }
 }

@@ -30,7 +30,7 @@ public final class ChristmasService {
         List<PromotionMenuDto> promotionMenuDtos = promotionMenuDtosFrom(appliedBenefits);
         List<BenefitDto> benefitDtos = benefitDtosFrom(appliedBenefits);
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
-        int paymentAmount = order.getTotalOrderAmount() - appliedBenefits.getTotalDiscountAmount();
+        int paymentAmount = appliedBenefits.getPaymentAmount(order.getTotalOrderAmount());
         String eventBadge = EventBadge.from(totalBenefitAmount).getName();
 
         return new BenefitPreview(promotionMenuDtos, benefitDtos, totalBenefitAmount, paymentAmount, eventBadge);

@@ -10,7 +10,7 @@ public final class AppliedBenefits {
     private final List<Benefit> benefits;
 
     private AppliedBenefits(List<Benefit> benefits) {
-        this.benefits = benefits;
+        this.benefits = List.copyOf(benefits);
     }
 
     public static AppliedBenefits from(List<Benefit> benefits) {
@@ -25,19 +25,19 @@ public final class AppliedBenefits {
     }
 
     public int getTotalBenefitAmount() {
-        int totalBenefitAmount = 0;
-        for (Benefit benefit : benefits) {
-            totalBenefitAmount += benefit.getBenefitAmount();
-        }
-        return totalBenefitAmount;
+        return benefits.stream()
+                .mapToInt(Benefit::getBenefitAmount)
+                .sum();
     }
 
-    public int getTotalDiscountAmount() {
-        int totalDiscountAmount = 0;
-        for (Benefit benefit : benefits) {
-            totalDiscountAmount += benefit.getDiscountAmount();
-        }
-        return totalDiscountAmount;
+    private int getTotalDiscountAmount() {
+        return benefits.stream()
+                .mapToInt(Benefit::getDiscountAmount)
+                .sum();
+    }
+
+    public int getPaymentAmount(int totalOrderAmount) {
+        return totalOrderAmount - getTotalDiscountAmount();
     }
 
     public List<Benefit> getBenefits() {
