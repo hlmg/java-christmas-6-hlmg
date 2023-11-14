@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.dto.BenefitDto;
+import christmas.dto.BenefitPreview;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
@@ -45,12 +46,20 @@ public class OutputView {
         System.out.printf("%,d원\n", totalOrderAmount);
     }
 
+    public void printBenefitPreview(BenefitPreview benefitPreview) {
+        printPromotionMenu(benefitPreview.promotionMenuDtos());
+        printBenefits(benefitPreview.benefitDtos());
+        printTotalBenefitAmount(benefitPreview.totalBenefitAmount());
+        printPaymentAmount(benefitPreview.paymentAmount());
+        printEventBadge(benefitPreview.eventBadge());
+    }
+
     /*
 
     <증정 메뉴>
     샴페인 1개
      */
-    public void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
+    private void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
         System.out.print("\n<증정 메뉴>\n");
 
         if (promotionMenuDtos.isEmpty()) {
@@ -73,7 +82,7 @@ public class OutputView {
     특별 할인: -1,000원
     증정 이벤트: -25,000원
     */
-    public void printBenefits(List<BenefitDto> benefitDtos) {
+    private void printBenefits(List<BenefitDto> benefitDtos) {
         System.out.print("\n<혜택 내역>\n");
 
         if (benefitDtos.isEmpty()) {
@@ -93,7 +102,7 @@ public class OutputView {
     <총혜택 금액>
     -31,246원
     */
-    public void printTotalBenefitAmount(int totalBenefitAmount) {
+    private void printTotalBenefitAmount(int totalBenefitAmount) {
         System.out.print("\n<총혜택 금액>\n");
 
         if (totalBenefitAmount == 0) {
@@ -109,7 +118,7 @@ public class OutputView {
     <할인 후 예상 결제 금액>
     135,754원
      */
-    public void printPaymentAmount(int paymentAmount) {
+    private void printPaymentAmount(int paymentAmount) {
         System.out.print("\n<할인 후 예상 결제 금액>\n");
 
         if (paymentAmount == 0) {
@@ -125,7 +134,7 @@ public class OutputView {
     <12월 이벤트 배지>
     산타
      */
-    public void printEventBadge(String eventBadge) {
+    private void printEventBadge(String eventBadge) {
         System.out.print("\n<12월 이벤트 배지>\n");
 
         System.out.printf("%s\n", eventBadge);
