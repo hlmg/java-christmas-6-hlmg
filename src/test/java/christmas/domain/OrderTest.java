@@ -69,4 +69,16 @@ class OrderTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Order.from(orderMenus));
     }
+
+    @Test
+    void 음료만_주문하면_예외가_발생한다() {
+        List<OrderMenu> orderMenus = List.of(
+                OrderMenu.from("제로콜라", 1),
+                OrderMenu.from("레드와인", 1),
+                OrderMenu.from("샴페인", 1)
+        );
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Order.from(orderMenus));
+    }
 }
