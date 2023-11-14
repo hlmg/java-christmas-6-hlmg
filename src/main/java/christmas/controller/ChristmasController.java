@@ -10,6 +10,7 @@ import christmas.dto.OrderMenuDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ChristmasController {
     private final InputView inputView = new InputView();
@@ -27,16 +28,24 @@ public class ChristmasController {
     }
 
     private PlanRequest createPlanRequest() {
-        int dayOfMonth = inputView.getVisitDate();
-        VisitDate visitDate = VisitDate.from(dayOfMonth);
+        VisitDate visitDate = exceptionHandleAndRetry(this::getVisitDate);
+        Order order = exceptionHandleAndRetry(this::getOrder);
 
-        List<OrderMenuDto> orderMenuDtos = inputView.getOrderItems();
-        Order order = orderFrom(orderMenuDtos);
-
-        outputView.printEventPreview(dayOfMonth);
-        outputView.printOrderItems(orderMenuDtos);
+        outputView.printEventPreview(visitDate.getDate());
+        outputView.printOrderItems(orderMenuDtoFrom(order));
         outputView.printTotalOrderAmount(order.getTotalOrderAmount());
+
         return new PlanRequest(visitDate, order);
+    }
+
+    private VisitDate getVisitDate() {
+        int dayOfMonth = inputView.getVisitDate();
+        return VisitDate.from(dayOfMonth);
+    }
+
+    private Order getOrder() {
+        List<OrderMenuDto> orderMenuDtos = inputView.getOrderItems();
+        return orderFrom(orderMenuDtos);
     }
 
     private Order orderFrom(List<OrderMenuDto> orderMenuDtos) {
@@ -44,5 +53,21 @@ public class ChristmasController {
                 .map(orderItem -> OrderMenu.from(orderItem.menuName(), orderItem.quantity()))
                 .toList();
         return Order.from(orderMenus);
+    }
+
+    private List<OrderMenuDto> orderMenuDtoFrom(Order order) {
+        return order.getOrderMenus().stream()
+                .map(orderMenu -> new OrderMenuDto(orderMenu.getMenuName(), orderMenu.getQuantity()))
+                .toList();
+    }
+
+    private <T> T exceptionHandleAndRetry(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

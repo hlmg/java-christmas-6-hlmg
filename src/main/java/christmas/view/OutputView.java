@@ -4,6 +4,7 @@ import christmas.dto.BenefitDto;
 import christmas.dto.BenefitPreview;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
 
@@ -24,8 +25,8 @@ public class OutputView {
         System.out.println(WELCOME_MESSAGE);
     }
 
-    public void printEventPreview(int dayOfMonth) {
-        String message = String.format(EVENT_PREVIEW_MESSAGE, dayOfMonth);
+    public void printEventPreview(LocalDate date) {
+        String message = String.format(EVENT_PREVIEW_MESSAGE, date.getDayOfMonth());
         System.out.println(message);
     }
 
