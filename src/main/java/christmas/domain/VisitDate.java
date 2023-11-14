@@ -1,10 +1,15 @@
 package christmas.domain;
 
+import static christmas.exception.ExceptionMessages.INVALID_DATE;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public final class VisitDate {
+    private static final int YEAR = 2023;
+    private static final int MONTH = 12;
+
     private final LocalDate date;
 
     private VisitDate(LocalDate date) {
@@ -18,9 +23,9 @@ public final class VisitDate {
 
     private static LocalDate dateOf(int dayOfMonth) {
         try {
-            return LocalDate.of(2023, 12, dayOfMonth);
+            return LocalDate.of(YEAR, MONTH, dayOfMonth);
         } catch (DateTimeException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_DATE.getMessage());
         }
     }
 

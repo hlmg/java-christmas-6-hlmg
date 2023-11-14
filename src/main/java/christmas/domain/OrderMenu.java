@@ -1,8 +1,12 @@
 package christmas.domain;
 
+import static christmas.exception.ExceptionMessages.INVALID_ORDER;
+
 import java.util.Objects;
 
 public final class OrderMenu {
+    private static final int MIN_ORDER_QUANTITY = 1;
+
     private final Menu menu;
     private final int quantity;
 
@@ -19,12 +23,12 @@ public final class OrderMenu {
 
     private static Menu getMenuFrom(String menuName) {
         return Menu.from(menuName)
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
 
     private static void validateQuantity(int quantity) {
-        if (quantity < 1) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if (quantity < MIN_ORDER_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
