@@ -27,6 +27,10 @@ public final class ChristmasService {
 
         AppliedBenefits appliedBenefits = eventManager.apply(visitDate, order);
 
+        return benefitPreviewFrom(appliedBenefits, order);
+    }
+
+    private BenefitPreview benefitPreviewFrom(AppliedBenefits appliedBenefits, Order order) {
         List<PromotionMenuDto> promotionMenuDtos = promotionMenuDtosFrom(appliedBenefits);
         List<BenefitDto> benefitDtos = benefitDtosFrom(appliedBenefits);
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
