@@ -7,11 +7,12 @@ import christmas.dto.PromotionMenuDto;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 public final class OutputView {
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     private static final String EVENT_PREVIEW_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String INFORMATION_HEADER_FORMAT = "\n<%s>\n";
+    private static final String INFORMATION_HEADER_FORMAT = "%n<%s>%n";
     private static final String ORDER_MENU = "주문 메뉴";
     private static final String TOTAL_ORDER_AMOUNT = "할인 전 총주문 금액";
     private static final String PROMOTION_MENU = "증정 메뉴";
@@ -32,7 +33,7 @@ public final class OutputView {
 
     public void printOrderItems(List<OrderMenuDto> orderMenuDtos) {
         printHeader(ORDER_MENU);
-        printPairContents(orderMenuDtos, "%s %d개\n", OrderMenuDto::menuName, OrderMenuDto::quantity);
+        printPairContents(orderMenuDtos, "%s %d개%n", OrderMenuDto::menuName, OrderMenuDto::quantity);
     }
 
     public void printTotalOrderAmount(int totalOrderAmount) {
@@ -50,12 +51,12 @@ public final class OutputView {
 
     private void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
         printHeader(PROMOTION_MENU);
-        printPairContents(promotionMenuDtos, "%s %d개\n", PromotionMenuDto::menuName, PromotionMenuDto::quantity);
+        printPairContents(promotionMenuDtos, "%s %d개%n", PromotionMenuDto::menuName, PromotionMenuDto::quantity);
     }
 
     private void printBenefits(List<BenefitDto> benefitDtos) {
         printHeader(BENEFIT_DETAILS);
-        printPairContents(benefitDtos, "%s -%,d원\n", BenefitDto::eventName, BenefitDto::price);
+        printPairContents(benefitDtos, "%s -%,d원%n", BenefitDto::eventName, BenefitDto::price);
     }
 
     private void printTotalBenefitAmount(int totalBenefitAmount) {
@@ -70,13 +71,11 @@ public final class OutputView {
 
     private void printEventBadge(String eventBadge) {
         printHeader(EVENT_BADGE);
-        System.out.printf("%s\n", eventBadge);
+        System.out.printf("%s%n", eventBadge);
     }
 
-    private <T> void printPairContents(List<T> contents,
-                                       String format,
-                                       Function<T, String> key,
-                                       Function<T, Integer> value) {
+    private <T> void printPairContents(List<T> contents, String format, Function<T, String> key,
+                                       ToIntFunction<T> value) {
         if (contents.isEmpty()) {
             System.out.println(NOTING);
             return;
@@ -84,7 +83,7 @@ public final class OutputView {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (T content : contents) {
-            stringBuilder.append(String.format(format, key.apply(content), value.apply(content)));
+            stringBuilder.append(String.format(format, key.apply(content), value.applyAsInt(content)));
         }
         System.out.print(stringBuilder);
     }
@@ -94,7 +93,7 @@ public final class OutputView {
             System.out.println(NOTING);
             return;
         }
-        System.out.printf("%,d원\n", amount);
+        System.out.printf("%,d원%n", amount);
     }
 
     private void printHeader(String header) {
