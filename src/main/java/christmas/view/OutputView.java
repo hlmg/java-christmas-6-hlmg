@@ -5,6 +5,7 @@ import christmas.dto.BenefitPreview;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
+import java.util.function.Function;
 
 public class OutputView {
     public static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -29,19 +30,13 @@ public class OutputView {
     }
 
     public void printOrderItems(List<OrderMenuDto> orderMenuDtos) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, ORDER_MENU);
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (OrderMenuDto orderMenuDto : orderMenuDtos) {
-            stringBuilder.append(
-                    String.format("%s %d개\n", orderMenuDto.menuName(), orderMenuDto.quantity()));
-        }
-        System.out.print(stringBuilder);
+        printHeader(ORDER_MENU);
+        printPairContents(orderMenuDtos, "%s %d개\n", OrderMenuDto::menuName, OrderMenuDto::quantity);
     }
 
     public void printTotalOrderAmount(int totalOrderAmount) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, TOTAL_ORDER_AMOUNT);
-        System.out.printf("%,d원\n", totalOrderAmount);
+        printHeader(TOTAL_ORDER_AMOUNT);
+        printAmount(totalOrderAmount);
     }
 
     public void printBenefitPreview(BenefitPreview benefitPreview) {
@@ -53,60 +48,55 @@ public class OutputView {
     }
 
     private void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, PROMOTION_MENU);
-
-        if (promotionMenuDtos.isEmpty()) {
-            System.out.println(NOTING);
-            return;
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (PromotionMenuDto promotionMenuDto : promotionMenuDtos) {
-            stringBuilder.append(String.format("%s %d개\n", promotionMenuDto.menuName(), promotionMenuDto.quantity()));
-        }
-        System.out.print(stringBuilder);
+        printHeader(PROMOTION_MENU);
+        printPairContents(promotionMenuDtos, "%s %d개\n", PromotionMenuDto::menuName, PromotionMenuDto::quantity);
     }
 
     private void printBenefits(List<BenefitDto> benefitDtos) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, BENEFIT_DETAILS);
+        printHeader(BENEFIT_DETAILS);
+        printPairContents(benefitDtos, "%s -%,d원\n", BenefitDto::eventName, BenefitDto::price);
+    }
 
-        if (benefitDtos.isEmpty()) {
+    private void printTotalBenefitAmount(int totalBenefitAmount) {
+        printHeader(TOTAL_BENEFIT_AMOUNT);
+        printAmount(-totalBenefitAmount);
+    }
+
+    private void printPaymentAmount(int paymentAmount) {
+        printHeader(PAYMENT_AMOUNT);
+        printAmount(paymentAmount);
+    }
+
+    private void printEventBadge(String eventBadge) {
+        printHeader(EVENT_BADGE);
+        System.out.printf("%s\n", eventBadge);
+    }
+
+    private <T> void printPairContents(List<T> contents,
+                                       String format,
+                                       Function<T, String> key,
+                                       Function<T, Integer> value) {
+        if (contents.isEmpty()) {
             System.out.println(NOTING);
             return;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (BenefitDto benefitDto : benefitDtos) {
-            stringBuilder.append(String.format("%s -%,d원\n", benefitDto.eventName(), benefitDto.price()));
+        for (T content : contents) {
+            stringBuilder.append(String.format(format, key.apply(content), value.apply(content)));
         }
         System.out.print(stringBuilder);
     }
 
-    private void printTotalBenefitAmount(int totalBenefitAmount) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, TOTAL_BENEFIT_AMOUNT);
-
-        if (totalBenefitAmount == 0) {
+    public void printAmount(int amount) {
+        if (amount == 0) {
             System.out.println(NOTING);
             return;
         }
-
-        System.out.printf("-%,d원\n", totalBenefitAmount);
+        System.out.printf("%,d원\n", amount);
     }
 
-    private void printPaymentAmount(int paymentAmount) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, PAYMENT_AMOUNT);
-
-        if (paymentAmount == 0) {
-            System.out.println(NOTING);
-            return;
-        }
-
-        System.out.printf("%,d원\n", paymentAmount);
-    }
-
-    private void printEventBadge(String eventBadge) {
-        System.out.printf(INFORMATION_HEADER_FORMAT, EVENT_BADGE);
-
-        System.out.printf("%s\n", eventBadge);
+    private void printHeader(String header) {
+        System.out.printf(INFORMATION_HEADER_FORMAT, header);
     }
 }
