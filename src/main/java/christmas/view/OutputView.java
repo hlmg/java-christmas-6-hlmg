@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.dto.BenefitDto;
-import christmas.dto.BenefitPreview;
+import christmas.dto.BenefitPreviewDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PromotionMenuDto;
 import java.time.LocalDate;
@@ -41,12 +41,12 @@ public final class OutputView {
         printAmount(totalOrderAmount);
     }
 
-    public void printBenefitPreview(BenefitPreview benefitPreview) {
-        printPromotionMenu(benefitPreview.promotionMenuDtos());
-        printBenefits(benefitPreview.benefitDtos());
-        printTotalBenefitAmount(benefitPreview.totalBenefitAmount());
-        printPaymentAmount(benefitPreview.paymentAmount());
-        printEventBadge(benefitPreview.eventBadge());
+    public void printBenefitPreview(BenefitPreviewDto benefitPreviewDto) {
+        printPromotionMenu(benefitPreviewDto.promotionMenuDtos());
+        printBenefits(benefitPreviewDto.benefitDtos());
+        printTotalBenefitAmount(benefitPreviewDto.totalBenefitAmount());
+        printPaymentAmount(benefitPreviewDto.paymentAmount());
+        printEventBadge(benefitPreviewDto.eventBadge());
     }
 
     private void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {

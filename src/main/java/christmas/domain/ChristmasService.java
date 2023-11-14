@@ -7,7 +7,7 @@ import christmas.domain.event.SpecialEvent;
 import christmas.domain.event.WeekdayEvent;
 import christmas.domain.event.WeekendEvent;
 import christmas.dto.BenefitDto;
-import christmas.dto.BenefitPreview;
+import christmas.dto.BenefitPreviewDto;
 import christmas.dto.PlanRequest;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
@@ -21,7 +21,7 @@ public final class ChristmasService {
                     new SpecialEvent(),
                     new PromotionEvent()));
 
-    public BenefitPreview plan(PlanRequest planRequest) {
+    public BenefitPreviewDto plan(PlanRequest planRequest) {
         VisitDate visitDate = planRequest.visitDate();
         Order order = planRequest.order();
 
@@ -30,14 +30,14 @@ public final class ChristmasService {
         return benefitPreviewFrom(appliedBenefits, order);
     }
 
-    private BenefitPreview benefitPreviewFrom(AppliedBenefits appliedBenefits, Order order) {
+    private BenefitPreviewDto benefitPreviewFrom(AppliedBenefits appliedBenefits, Order order) {
         List<PromotionMenuDto> promotionMenuDtos = promotionMenuDtosFrom(appliedBenefits);
         List<BenefitDto> benefitDtos = benefitDtosFrom(appliedBenefits);
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
         int paymentAmount = appliedBenefits.getPaymentAmount(order.getTotalOrderAmount());
         String eventBadge = EventBadge.from(totalBenefitAmount).getName();
 
-        return new BenefitPreview(promotionMenuDtos, benefitDtos, totalBenefitAmount, paymentAmount, eventBadge);
+        return new BenefitPreviewDto(promotionMenuDtos, benefitDtos, totalBenefitAmount, paymentAmount, eventBadge);
     }
 
     private List<PromotionMenuDto> promotionMenuDtosFrom(AppliedBenefits appliedBenefits) {

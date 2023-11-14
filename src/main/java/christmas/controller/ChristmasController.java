@@ -4,7 +4,7 @@ import christmas.domain.ChristmasService;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
-import christmas.dto.BenefitPreview;
+import christmas.dto.BenefitPreviewDto;
 import christmas.dto.OrderMenuDto;
 import christmas.dto.PlanRequest;
 import christmas.view.InputView;
@@ -22,9 +22,9 @@ public class ChristmasController {
 
         PlanRequest planRequest = createPlanRequest();
 
-        BenefitPreview benefitPreview = christmasService.plan(planRequest);
+        BenefitPreviewDto benefitPreviewDto = christmasService.plan(planRequest);
 
-        outputView.printBenefitPreview(benefitPreview);
+        outputView.printBenefitPreview(benefitPreviewDto);
     }
 
     private PlanRequest createPlanRequest() {

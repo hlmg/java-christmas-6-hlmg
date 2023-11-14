@@ -3,7 +3,7 @@ package christmas.dto;
 
 import java.util.List;
 
-public record BenefitPreview(
+public record BenefitPreviewDto(
         List<PromotionMenuDto> promotionMenuDtos,
         List<BenefitDto> benefitDtos,
         int totalBenefitAmount,
