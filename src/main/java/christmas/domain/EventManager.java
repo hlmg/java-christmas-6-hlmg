@@ -1,10 +1,10 @@
 package christmas.domain;
 
+import christmas.domain.benefit.Benefit;
 import christmas.domain.event.Event;
-import christmas.domain.Benefit.Benefit;
 import java.util.List;
 
-public class EventManager {
+public final class EventManager {
     public static final int MIN_ORDER_AMOUNT = 10000;
     private final List<Event> events;
 
@@ -36,15 +36,3 @@ public class EventManager {
                 .toList();
     }
 }
-
-// 프로모션 이벤트
-// 할인 이벤트
-
-// 할인 이벤트의 경우 만족하면
-
-// 할인 이벤트
-// getEventname, getdiscountAmount
-// 증정 이벤트
-// getEventName, getPromotionMenu
-
-

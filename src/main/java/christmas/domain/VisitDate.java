@@ -4,7 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class VisitDate {
+public final class VisitDate {
     private final LocalDate date;
 
     private VisitDate(LocalDate date) {

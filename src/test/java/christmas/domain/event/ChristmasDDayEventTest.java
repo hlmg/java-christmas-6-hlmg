@@ -2,11 +2,11 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.Benefit.Benefit;
-import christmas.domain.Benefit.DiscountBenefit;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
+import christmas.domain.benefit.Benefit;
+import christmas.domain.benefit.DiscountBenefit;
 import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,10 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 @SuppressWarnings("NonAsciiCharacters")
 class ChristmasDDayEventTest {
 
-    /*
-    - 크리스마스 디데이 할인
-    - 이벤트 기간: 2023.12.1 ~ 2023.12.25
-     */
+    // 이벤트 기간: 2023.12.1 ~ 2023.12.25
     @ParameterizedTest
     @CsvSource(textBlock = """
             1, true
@@ -33,11 +30,7 @@ class ChristmasDDayEventTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    /*
-    - 1,000원으로 시작하여 크리스마스가 다가올수록 날마다 할인 금액이 100원씩 증가
-    - 총주문 금액에서 해당 금액만큼 할인
-    (e.g. 시작일인 12월 1일에 1,000원, 2일에 1,100원, ..., 25일엔 3,400원 할인)
-    */
+    // 날마다 할인 금액이 100원씩 증가, 시작일인 12월 1일에 1,000원, 2일에 1,100원, ..., 25일엔 3,400원 할인)
     @ParameterizedTest
     @CsvSource(textBlock = """
             1, 1000

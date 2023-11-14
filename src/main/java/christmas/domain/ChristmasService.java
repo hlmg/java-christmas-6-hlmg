@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.domain.Benefit.Benefit;
+import christmas.domain.benefit.Benefit;
 import christmas.domain.event.ChristmasDDayEvent;
 import christmas.domain.event.PromotionEvent;
 import christmas.domain.event.SpecialEvent;
@@ -13,7 +13,7 @@ import christmas.dto.PromotionMenuDto;
 import java.util.List;
 import java.util.Map;
 
-public class ChristmasService {
+public final class ChristmasService {
     private final EventManager eventManager = EventManager.from(
             List.of(new ChristmasDDayEvent(),
                     new WeekdayEvent(),

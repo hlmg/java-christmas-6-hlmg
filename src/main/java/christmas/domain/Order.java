@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class Order {
+public final class Order {
     private final List<OrderMenu> orderMenus;
 
     private Order(List<OrderMenu> orderMenus) {

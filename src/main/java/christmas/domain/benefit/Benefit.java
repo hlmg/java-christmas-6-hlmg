@@ -1,4 +1,4 @@
-package christmas.domain.Benefit;
+package christmas.domain.benefit;
 
 import christmas.domain.Menu;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package christmas.domain;
 
 import java.util.Objects;
 
-public class OrderMenu {
+public final class OrderMenu {
     private final Menu menu;
     private final int quantity;
 

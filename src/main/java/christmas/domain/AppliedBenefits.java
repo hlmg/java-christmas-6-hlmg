@@ -1,12 +1,12 @@
 package christmas.domain;
 
-import christmas.domain.Benefit.Benefit;
+import christmas.domain.benefit.Benefit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class AppliedBenefits {
+public final class AppliedBenefits {
     private final List<Benefit> benefits;
 
     private AppliedBenefits(List<Benefit> benefits) {

@@ -2,12 +2,12 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.Benefit.Benefit;
-import christmas.domain.Benefit.PromotionBenefit;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
+import christmas.domain.benefit.Benefit;
+import christmas.domain.benefit.PromotionBenefit;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

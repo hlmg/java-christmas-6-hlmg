@@ -1,10 +1,10 @@
-package christmas.domain.Benefit;
+package christmas.domain.benefit;
 
 import christmas.domain.Menu;
 import java.util.Objects;
 import java.util.Optional;
 
-public class DiscountBenefit implements Benefit {
+public final class DiscountBenefit implements Benefit {
     private final String eventName;
     private final int discountAmount;
 

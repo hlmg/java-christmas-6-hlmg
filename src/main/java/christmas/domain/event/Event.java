@@ -1,8 +1,8 @@
 package christmas.domain.event;
 
-import christmas.domain.Benefit.Benefit;
 import christmas.domain.Order;
 import christmas.domain.VisitDate;
+import christmas.domain.benefit.Benefit;
 
 public interface Event {
 
