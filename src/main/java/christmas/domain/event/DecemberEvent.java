@@ -8,7 +8,7 @@ public abstract class DecemberEvent implements Event {
     private static final LocalDate startDate = LocalDate.of(2023, 12, 1);
     private static final LocalDate endDate = LocalDate.of(2023, 12, 31);
 
-    // 이벤트 기간: 2023.12.1 ~ 2023.12.31
+
     @Override
     public boolean isSatisfiedBy(VisitDate visitDate, Order order) {
         return isInEventPeriod(visitDate) && isSatisfiedCondition(visitDate, order);
