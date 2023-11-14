@@ -21,26 +21,17 @@ public final class ChristmasService {
                     new SpecialEvent(),
                     new PromotionEvent()));
 
-    //TODO: test 작성
-    public String getEventBadge(int totalBenefitAmount) {
-        if (totalBenefitAmount >= 20000) {
-            return "산타";
-        } else if (totalBenefitAmount >= 10000) {
-            return "트리";
-        } else if (totalBenefitAmount >= 5000) {
-            return "별";
-        }
-        return "없음";
-    }
-
     public BenefitPreview plan(PlanRequest planRequest) {
-        AppliedBenefits appliedBenefits = eventManager.apply(planRequest.visitDate(), planRequest.order());
+        VisitDate visitDate = planRequest.visitDate();
+        Order order = planRequest.order();
+
+        AppliedBenefits appliedBenefits = eventManager.apply(visitDate, order);
 
         List<PromotionMenuDto> promotionMenuDtos = promotionMenuDtosFrom(appliedBenefits);
         List<BenefitDto> benefitDtos = benefitDtosFrom(appliedBenefits);
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
-        int paymentAmount = planRequest.order().getTotalOrderAmount() - appliedBenefits.getTotalDiscountAmount();
-        String eventBadge = getEventBadge(totalBenefitAmount);
+        int paymentAmount = order.getTotalOrderAmount() - appliedBenefits.getTotalDiscountAmount();
+        String eventBadge = EventBadge.from(totalBenefitAmount).getName();
 
         return new BenefitPreview(promotionMenuDtos, benefitDtos, totalBenefitAmount, paymentAmount, eventBadge);
     }
