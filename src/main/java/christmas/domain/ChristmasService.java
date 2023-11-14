@@ -8,6 +8,7 @@ import christmas.domain.event.WeekdayEvent;
 import christmas.domain.event.WeekendEvent;
 import christmas.dto.BenefitDto;
 import christmas.dto.BenefitPreview;
+import christmas.dto.PlanRequest;
 import christmas.dto.PromotionMenuDto;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +33,13 @@ public class ChristmasService {
         return "없음";
     }
 
-    public BenefitPreview plan(VisitDate visitDate, Order order) {
-        AppliedBenefits appliedBenefits = eventManager.apply(visitDate, order);
+    public BenefitPreview plan(PlanRequest planRequest) {
+        AppliedBenefits appliedBenefits = eventManager.apply(planRequest.visitDate(), planRequest.order());
 
         List<PromotionMenuDto> promotionMenuDtos = promotionMenuDtosFrom(appliedBenefits);
         List<BenefitDto> benefitDtos = benefitDtosFrom(appliedBenefits);
         int totalBenefitAmount = appliedBenefits.getTotalBenefitAmount();
-        int paymentAmount = order.getTotalOrderAmount() - appliedBenefits.getTotalDiscountAmount();
+        int paymentAmount = planRequest.order().getTotalOrderAmount() - appliedBenefits.getTotalDiscountAmount();
         String eventBadge = getEventBadge(totalBenefitAmount);
 
         return new BenefitPreview(promotionMenuDtos, benefitDtos, totalBenefitAmount, paymentAmount, eventBadge);

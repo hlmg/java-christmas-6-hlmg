@@ -5,6 +5,7 @@ import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
 import christmas.dto.BenefitPreview;
+import christmas.dto.PlanRequest;
 import christmas.dto.OrderMenuDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -18,6 +19,14 @@ public class ChristmasController {
     public void run() {
         outputView.printWelcome();
 
+        PlanRequest planRequest = createPlanRequest();
+
+        BenefitPreview benefitPreview = christmasService.plan(planRequest);
+
+        outputView.printBenefitPreview(benefitPreview);
+    }
+
+    private PlanRequest createPlanRequest() {
         int dayOfMonth = inputView.getVisitDate();
         VisitDate visitDate = VisitDate.from(dayOfMonth);
 
@@ -27,10 +36,7 @@ public class ChristmasController {
         outputView.printEventPreview(dayOfMonth);
         outputView.printOrderItems(orderMenuDtos);
         outputView.printTotalOrderAmount(order.getTotalOrderAmount());
-
-        BenefitPreview benefitPreview = christmasService.plan(visitDate, order);
-
-        outputView.printBenefitPreview(benefitPreview);
+        return new PlanRequest(visitDate, order);
     }
 
     private Order orderFrom(List<OrderMenuDto> orderMenuDtos) {
