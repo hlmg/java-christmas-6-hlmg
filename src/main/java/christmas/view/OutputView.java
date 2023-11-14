@@ -7,26 +7,29 @@ import christmas.dto.PromotionMenuDto;
 import java.util.List;
 
 public class OutputView {
+    public static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
+    public static final String EVENT_PREVIEW_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String INFORMATION_HEADER_FORMAT = "\n<%s>\n";
+    private static final String ORDER_MENU = "주문 메뉴";
+    private static final String TOTAL_ORDER_AMOUNT = "할인 전 총주문 금액";
+    private static final String PROMOTION_MENU = "증정 메뉴";
+    private static final String BENEFIT_DETAILS = "혜택 내역";
+    private static final String TOTAL_BENEFIT_AMOUNT = "총혜택 금액";
+    private static final String PAYMENT_AMOUNT = "할인 후 예상 결제 금액";
+    private static final String EVENT_BADGE = "12월 이벤트 배지";
+    public static final String NOTING = "없음";
 
     public void printWelcome() {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+        System.out.println(WELCOME_MESSAGE);
     }
 
     public void printEventPreview(int dayOfMonth) {
-        String message = String.format("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", dayOfMonth);
+        String message = String.format(EVENT_PREVIEW_MESSAGE, dayOfMonth);
         System.out.println(message);
     }
 
-    /*
-
-    <주문 메뉴>
-    티본스테이크 1개
-    바비큐립 1개
-    초코케이크 2개
-    제로콜라 1개
-     */
     public void printOrderItems(List<OrderMenuDto> orderMenuDtos) {
-        System.out.print("\n<주문 메뉴>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, ORDER_MENU);
 
         StringBuilder stringBuilder = new StringBuilder();
         for (OrderMenuDto orderMenuDto : orderMenuDtos) {
@@ -36,13 +39,8 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
-    /*
-
-    <할인 전 총주문 금액>
-    142,000원
-     */
     public void printTotalOrderAmount(int totalOrderAmount) {
-        System.out.print("\n<할인 전 총주문 금액>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, TOTAL_ORDER_AMOUNT);
         System.out.printf("%,d원\n", totalOrderAmount);
     }
 
@@ -54,16 +52,11 @@ public class OutputView {
         printEventBadge(benefitPreview.eventBadge());
     }
 
-    /*
-
-    <증정 메뉴>
-    샴페인 1개
-     */
     private void printPromotionMenu(List<PromotionMenuDto> promotionMenuDtos) {
-        System.out.print("\n<증정 메뉴>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, PROMOTION_MENU);
 
         if (promotionMenuDtos.isEmpty()) {
-            System.out.println("없음");
+            System.out.println(NOTING);
             return;
         }
 
@@ -74,19 +67,11 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
-    /*
-
-    <혜택 내역>
-    크리스마스 디데이 할인: -1,200원
-    평일 할인: -4,046원
-    특별 할인: -1,000원
-    증정 이벤트: -25,000원
-    */
     private void printBenefits(List<BenefitDto> benefitDtos) {
-        System.out.print("\n<혜택 내역>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, BENEFIT_DETAILS);
 
         if (benefitDtos.isEmpty()) {
-            System.out.println("없음");
+            System.out.println(NOTING);
             return;
         }
 
@@ -97,45 +82,30 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
-    /*
-
-    <총혜택 금액>
-    -31,246원
-    */
     private void printTotalBenefitAmount(int totalBenefitAmount) {
-        System.out.print("\n<총혜택 금액>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, TOTAL_BENEFIT_AMOUNT);
 
         if (totalBenefitAmount == 0) {
-            System.out.println("없음");
+            System.out.println(NOTING);
             return;
         }
 
         System.out.printf("-%,d원\n", totalBenefitAmount);
     }
 
-    /*
-
-    <할인 후 예상 결제 금액>
-    135,754원
-     */
     private void printPaymentAmount(int paymentAmount) {
-        System.out.print("\n<할인 후 예상 결제 금액>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, PAYMENT_AMOUNT);
 
         if (paymentAmount == 0) {
-            System.out.println("없음");
+            System.out.println(NOTING);
             return;
         }
 
         System.out.printf("%,d원\n", paymentAmount);
     }
 
-    /*
-
-    <12월 이벤트 배지>
-    산타
-     */
     private void printEventBadge(String eventBadge) {
-        System.out.print("\n<12월 이벤트 배지>\n");
+        System.out.printf(INFORMATION_HEADER_FORMAT, EVENT_BADGE);
 
         System.out.printf("%s\n", eventBadge);
     }
