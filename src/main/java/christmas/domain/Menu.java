@@ -1,7 +1,9 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum Menu {
     BUTTON_MUSHROOM_SOUP("양송이수프", 6_000, Type.APPETIZER),
@@ -17,6 +19,7 @@ public enum Menu {
     RED_WINE("레드와인", 60_000, Type.BEVERAGE),
     CHAMPAGNE("샴페인", 25_000, Type.BEVERAGE);
 
+    private static final Map<String, Menu> cache;
     private final String name;
     private final int price;
     private final Type type;
@@ -27,14 +30,13 @@ public enum Menu {
         this.type = type;
     }
 
-    public static Optional<Menu> from(String name) {
-        return Arrays.stream(Menu.values())
-                .filter(menu -> menu.name.equals(name))
-                .findAny();
+    static {
+        cache = Arrays.stream(Menu.values())
+                .collect(Collectors.toMap(Menu::getName, menu -> menu));
     }
 
-    public int getPrice() {
-        return price;
+    public static Optional<Menu> from(String name) {
+        return Optional.ofNullable(cache.get(name));
     }
 
     public boolean isDessert() {
@@ -51,6 +53,10 @@ public enum Menu {
 
     public String getName() {
         return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     private enum Type {
