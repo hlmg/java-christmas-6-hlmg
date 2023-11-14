@@ -58,4 +58,15 @@ class OrderTest {
 
         assertThat(dessertMenuQuantity).isEqualTo(3);
     }
+
+    @Test
+    void 주문_수량이_20개가_넘으면_예외가_발생한다() {
+        List<OrderMenu> orderMenus = List.of(
+                OrderMenu.from("티본스테이크", 10),
+                OrderMenu.from("바비큐립", 11)
+        );
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Order.from(orderMenus));
+    }
 }
