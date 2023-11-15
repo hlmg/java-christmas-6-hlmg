@@ -7,8 +7,8 @@ import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.PromotionBenefit;
 
 public final class PromotionEvent extends DecemberEvent {
-    public static final String EVENT_NAME = "증정 이벤트";
-    public static final int MIN_ORDER_AMOUNT = 120_000;
+    private static final String EVENT_NAME = "증정 이벤트";
+    private static final int MIN_ORDER_AMOUNT = 120_000;
 
     @Override
     protected boolean isSatisfiedCondition(VisitDate visitDate, Order order) {

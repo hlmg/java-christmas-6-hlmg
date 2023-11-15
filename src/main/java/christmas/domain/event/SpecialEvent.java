@@ -8,9 +8,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public final class SpecialEvent extends DecemberEvent {
-    public static final LocalDate CHRISTMAS = LocalDate.of(2023, 12, 25);
-    public static final String EVENT_NAME = "특별 할인";
-    public static final int DISCOUNT_AMOUNT = 1000;
+    private static final LocalDate CHRISTMAS = LocalDate.of(2023, 12, 25);
+    private static final String EVENT_NAME = "특별 할인";
+    private static final int DISCOUNT_AMOUNT = 1000;
 
     @Override
     protected boolean isSatisfiedCondition(VisitDate visitDate, Order order) {

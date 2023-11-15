@@ -8,8 +8,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public final class WeekendEvent extends DecemberEvent {
-    public static final String EVENT_NAME = "주말 할인";
-    public static final int DISCOUNT_PER_UNIT = 2023;
+    private static final String EVENT_NAME = "주말 할인";
+    private static final int DISCOUNT_PER_UNIT = 2023;
 
     @Override
     protected boolean isSatisfiedCondition(VisitDate visitDate, Order order) {
