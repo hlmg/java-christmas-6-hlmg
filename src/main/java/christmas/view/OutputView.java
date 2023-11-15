@@ -90,7 +90,7 @@ public final class OutputView {
 
     private void printAmount(int amount) {
         if (amount == 0) {
-            System.out.println(NOTING);
+            System.out.println("0원");
             return;
         }
         System.out.printf("%,d원%n", amount);
