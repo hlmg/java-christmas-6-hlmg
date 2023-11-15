@@ -29,7 +29,7 @@ public final class DiscountBenefit implements Benefit {
 
     @Override
     public int getBenefitAmount() {
-        return discountAmount;
+        return getDiscountAmount();
     }
 
     @Override
