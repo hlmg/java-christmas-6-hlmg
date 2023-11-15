@@ -1,8 +1,8 @@
 package christmas.domain;
 
-import static christmas.exception.ExceptionMessages.INVALID_ORDER;
-import static christmas.exception.ExceptionMessages.ONLY_BEVERAGES_NOT_ALLOWED;
-import static christmas.exception.ExceptionMessages.INVALID_ORDER_MENU_QUANTITY;
+import static christmas.common.ExceptionMessages.INVALID_ORDER;
+import static christmas.common.ExceptionMessages.ONLY_BEVERAGES_NOT_ALLOWED;
+import static christmas.common.ExceptionMessages.INVALID_ORDER_MENU_QUANTITY;
 
 import java.util.HashSet;
 import java.util.List;

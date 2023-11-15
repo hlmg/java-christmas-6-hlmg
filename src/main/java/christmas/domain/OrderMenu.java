@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.exception.ExceptionMessages.INVALID_ORDER;
+import static christmas.common.ExceptionMessages.INVALID_ORDER;
 
 import java.util.Objects;
 

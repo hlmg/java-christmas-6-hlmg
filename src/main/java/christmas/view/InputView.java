@@ -1,7 +1,7 @@
 package christmas.view;
 
-import static christmas.exception.ExceptionMessages.INVALID_DATE;
-import static christmas.exception.ExceptionMessages.INVALID_ORDER;
+import static christmas.common.ExceptionMessages.INVALID_DATE;
+import static christmas.common.ExceptionMessages.INVALID_ORDER;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.dto.OrderMenuDto;

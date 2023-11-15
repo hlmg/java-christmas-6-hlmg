@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.exception.ExceptionMessages.INVALID_DATE;
+import static christmas.common.ExceptionMessages.INVALID_DATE;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

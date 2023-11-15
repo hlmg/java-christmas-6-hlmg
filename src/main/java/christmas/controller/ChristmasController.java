@@ -13,9 +13,15 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ChristmasController {
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
-    private final ChristmasService christmasService = new ChristmasService();
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final ChristmasService christmasService;
+
+    public ChristmasController(InputView inputView, OutputView outputView, ChristmasService christmasService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.christmasService = christmasService;
+    }
 
     public void run() {
         outputView.printWelcome();

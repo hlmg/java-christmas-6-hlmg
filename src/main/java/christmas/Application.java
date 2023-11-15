@@ -1,9 +1,11 @@
 package christmas;
 
+import christmas.common.Config;
 import christmas.controller.ChristmasController;
 
 public class Application {
     public static void main(String[] args) {
-        new ChristmasController().run();
+        ChristmasController christmasController = new Config().getChristmasController();
+        christmasController.run();
     }
 }
